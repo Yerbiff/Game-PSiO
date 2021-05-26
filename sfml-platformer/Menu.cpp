@@ -25,7 +25,7 @@ Menu::~Menu()
 {
 
 }
-void Menu::draw(sf::RenderWindow &window)
+void Menu::render(sf::RenderWindow& window)
 {
 	for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
 	{
@@ -50,3 +50,22 @@ void Menu::MoveDown()
 		menu[selectedItemIndex_].setFillColor(sf::Color::Red);
 	}
 }
+void Menu::update()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		this->MoveUp();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		this->MoveDown();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+		switch (this->GetPressedItem())
+		{
+		case 0:
+			//Przejscie do menu z wyborem poziomu trudnoœci
+			break;
+		case 1:
+			std::exit(0); //wy³aczenie aplikacji z menu
+			break;
+		}
+
+}
+
