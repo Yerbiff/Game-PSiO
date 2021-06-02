@@ -1,15 +1,25 @@
 ﻿  Game.cpp
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\Game.cpp(15,60): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+  GameState.cpp
+  MainMenuState.cpp
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\MainMenuState.cpp(52,78): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
           ]
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\Game.cpp(15,40): warning C4244: "argument": konwersja z "T" do "float", możliwa utrata danych
+          and
+          [
+              T=float
+          ]
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\MainMenuState.cpp(52,57): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
           with
           [
               T=unsigned int
           ]
-  Menu.cpp
+          and
+          [
+              T=float
+          ]
+  State.cpp
   main.cpp
   Generowanie kodu...
   sfml-platformer.vcxproj -> C:\Users\Jarek\Documents\Game-PSiO\Debug\sfml-platformer.exe

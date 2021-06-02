@@ -60,6 +60,7 @@ void Menu::update()
 		switch (this->GetPressedItem())
 		{
 		case 0:
+			
 			//Przejscie do menu z wyborem poziomu trudnoœci
 			break;
 		case 1:

@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "Game.h"
+#include <map>
 
 int main() {
 
-	//srand(time(static_cast<unsigned>(0)));
-
 	Game game;
 
-	while (game.getWindow().isOpen()) {
-		game.update();
-		game.render();
-	}
+	game.run();
 
 	return 0;
 }

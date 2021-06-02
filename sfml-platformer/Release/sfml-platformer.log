@@ -1,0 +1,31 @@
+﻿  stdafx.cpp
+  Entity.cpp
+  Game.cpp
+  GameState.cpp
+  main.cpp
+  MainMenuState.cpp
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\MainMenuState.cpp(52,78): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\MainMenuState.cpp(52,57): warning C4244: "argument": konwersja z "T" do "T", możliwa utrata danych
+          with
+          [
+              T=unsigned int
+          ]
+          and
+          [
+              T=float
+          ]
+  Menu.cpp
+  State.cpp
+  Trwa generowanie kodu
+  Previous IPDB not found, fall back to full compilation.
+  All 405 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Zakończono generowanie kodu
+  sfml-platformer.vcxproj -> C:\Users\Jarek\Documents\Game-PSiO\Release\sfml-platformer.exe

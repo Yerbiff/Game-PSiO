@@ -2,6 +2,7 @@
 #include <ctime>
 #include <iostream>
 #include <time.h>
+#include <vector>
 
 //SFML
 #include <SFML/System.hpp>

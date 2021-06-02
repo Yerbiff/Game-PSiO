@@ -8,6 +8,7 @@ class Menu
 private:
 	int selectedItemIndex_;
 	sf::Font font;
+
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
 
 public:

@@ -1,33 +1,45 @@
 #pragma once
 
-#include "stdafx.h"
-#include "Menu.h"
+#include "MainMenuState.h"
 
 class Game
 {
 private:
-	sf::RenderWindow window;
+	//Variables
+	sf::RenderWindow* window;
 	sf::Event event;
-	Menu* menu;
 
+	sf::Clock dtClock;
+	float dt;
+
+	std::stack<State*> states;
+
+	std::map<std::string, int> supportedKeys;
+
+	//Initialization
 	void initWindow();
-	void initMenu();
+	void initKeys();
+	void initStates();
+	
 
 public:
-
+	//Constructors/Destructors
 	Game();
 	virtual ~Game();
 
-
-	void updateMenu();
-	void renderMenu();
-
-
-
 	//Functions
+	void endAplication();
+
+	//Update
+	void updateSFMLEvents();
 	void update();
+	void updateDt();
+
+	//Render
 	void render();
-	const sf::RenderWindow& getWindow() const;
+
+	void run();
+
 
 };
 
