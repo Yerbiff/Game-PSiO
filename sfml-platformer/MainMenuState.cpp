@@ -1,6 +1,20 @@
 #include "stdafx.h"
 #include "MainMenuState.h"
 
+void MainMenuState::initVariables()
+{
+}
+
+void MainMenuState::initBackground()
+{
+	this->background.setSize(sf::Vector2f(static_cast<float>(this->window->getSize().x), static_cast<float>(this->window->getSize().y)));
+	if (!this->bgTexture.loadFromFile("Resources/Images/Background/bg.png"))
+	{
+		throw("Error Main background could not find");
+	}
+	this->background.setTexture(&this->bgTexture);
+}
+
 void MainMenuState::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/arial.ttf"))
@@ -30,27 +44,27 @@ void MainMenuState::initKeybinds()
 void MainMenuState::initMenuitems()
 {
 	this->menu[0].setFont(font);
+	this->menu[0].setScale(2,2);
 	this->menu[0].setFillColor(sf::Color::Red);
 	this->menu[0].setString("New Game");
-	this->menu[0].setPosition(sf::Vector2f(window->getSize().x / 2.f, window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 1));
+	this->menu[0].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 1));
 
 	this->menu[1].setFont(font);
+	this->menu[1].setScale(2, 2);
 	this->menu[1].setFillColor(sf::Color::White);
 	this->menu[1].setString("Exit");
-	this->menu[1].setPosition(sf::Vector2f(window->getSize().x / 2.f, window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2));
+	this->menu[1].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2));
 
 	selectedItemIndex_ = 0;
 }
 
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states) : State(window, supportedKeys, states)
 {
+	this->initVariables();
+	this->initBackground();
 	this->initKeybinds();
 	this->initFonts();
 	this->initMenuitems();
-	
-
-	this->background.setSize(sf::Vector2f(window->getSize().x, window->getSize().y));
-	this->background.setFillColor(sf::Color::Black);
 
 }
 
@@ -77,14 +91,8 @@ void MainMenuState::MoveDown()
 	}
 }
 
-void MainMenuState::endState()
-{
-	std::cout << "ending Mainmanustate";
-}
-
 void MainMenuState::updateInput(const float& dt)
 {
-	this->checkforQuit();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_UP"))))
 		this->MoveUp();
@@ -99,7 +107,9 @@ void MainMenuState::updateInput(const float& dt)
 			this->states->push(new GameState(this->window, this->supportedKeys, this->states));
 			break;
 		case 1:
-			this->quit = true; //wy³aczenie aplikacji z menu
+			//this->quit = true;
+			this->endState();
+			//exit(1);//wy³aczenie aplikacji z menu
 			break;
 		}
 

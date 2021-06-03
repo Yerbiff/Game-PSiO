@@ -5,6 +5,7 @@
 #include <sstream>
 #include <stack>
 #include <map>
+#include "Player.h"
 
 class State
 {
@@ -18,7 +19,7 @@ protected:
 	bool quit;
 
 	//Resorces
-	std::vector<sf::Texture> textures;
+	std::map<std::string,sf::Texture> textures;
 
 	//Functions
 	virtual void initKeybinds() = 0;
@@ -29,9 +30,10 @@ public:
 
 	const bool& getQuit() const;
 
-	virtual void checkforQuit();
+	//virtual void endStateUpdate() = 0;
 
-	virtual void endState() = 0;
+	void endState();
+
 	virtual void updateInput(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;
 	virtual void render(sf::RenderTarget* target = nullptr) = 0;
