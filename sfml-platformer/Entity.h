@@ -17,11 +17,11 @@ public:
 
 	//
 	void setTexture(sf::Texture& texture);
-	void creatMovmentComponent(const float maxVelocity);
+	void creatMovmentComponent(const float maxVelocity, const float acceleration, const float deceleration);
 
 	//Functions
 	virtual void setPosition(const float x, const float y);
-	virtual void move(const float& dt,const float x, const float y);
+	virtual void move(const float x, const float y, const float& dt);
 
 	virtual void update(const float& dt);
 	virtual void render(sf::RenderTarget* terget);
