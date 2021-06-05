@@ -1,13 +1,7 @@
-﻿  Entity.cpp
-  Game.cpp
-  GameState.cpp
-  MainMenuState.cpp
-  Player.cpp
-  State.cpp
-  main.cpp
+﻿  Player.cpp
   Trwa generowanie kodu
-  13 of 578 functions ( 2.2%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  1 of 583 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   sfml-platformer.vcxproj -> C:\Users\Jarek\Documents\Game-PSiO\Release\sfml-platformer.exe

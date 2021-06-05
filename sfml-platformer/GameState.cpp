@@ -21,7 +21,7 @@ void GameState::initKeybinds()
 
 void GameState::initTextures()
 {
-	if(!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprites/Player/adventurer_sprite_sheet_v1.1.png"))
+	if(!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprites/Player/sprite_sheet.png"))
 	{
 		throw("could not load player texture");
 	}
@@ -30,7 +30,7 @@ void GameState::initTextures()
 void GameState::initPlayers()
 {
 	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
-	this->player->scale(sf::Vector2f(2, 2));
+	//this->player->scale(sf::Vector2f(2, 2));
 }
 
 GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states): State(window,supportedKeys, states)
@@ -73,5 +73,5 @@ void GameState::render(sf::RenderTarget* target)
 	if (!target)
 		target = this->window;
 
-	this->player->render(target);
+	this->player->render(*target);
 }
