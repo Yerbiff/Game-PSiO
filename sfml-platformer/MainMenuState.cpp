@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainMenuState.h"
 
+
 void MainMenuState::initVariables()
 {
 }
@@ -44,17 +45,18 @@ void MainMenuState::initKeybinds()
 void MainMenuState::initMenuitems()
 {
 	this->menu[0].setFont(font);
-	this->menu[0].setFillColor(sf::Color::Red);
+	this->menu[0].setFillColor(sf::Color::White);
 	this->menu[0].setString("New Game");
 	this->menu[0].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 1));
 
 	this->menu[1].setFont(font);
-	this->menu[1].setFillColor(sf::Color::White);
+	this->menu[1].setFillColor(sf::Color(128, 128, 128, 200));
 	this->menu[1].setString("Exit");
 	this->menu[1].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2));
 
 	selectedItemIndex_ = 0;
 }
+
 
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states) : State(window, supportedKeys, states)
 {
@@ -74,18 +76,18 @@ void MainMenuState::MoveUp()
 {
 	if (selectedItemIndex_ - 1 >= 0)
 	{
-		menu[selectedItemIndex_].setFillColor(sf::Color::White);
+		menu[selectedItemIndex_].setFillColor(sf::Color(128, 128, 128, 200));
 		selectedItemIndex_--;
-		menu[selectedItemIndex_].setFillColor(sf::Color::Red);
+		menu[selectedItemIndex_].setFillColor(sf::Color::White);
 	}
 }
 void MainMenuState::MoveDown()
 {
 	if (selectedItemIndex_ + 1 < MAX_NUMBER_OF_ITEMS)
 	{
-		menu[selectedItemIndex_].setFillColor(sf::Color::White);
+		menu[selectedItemIndex_].setFillColor(sf::Color(128, 128, 128, 200));
 		selectedItemIndex_++;
-		menu[selectedItemIndex_].setFillColor(sf::Color::Red);
+		menu[selectedItemIndex_].setFillColor(sf::Color::White);
 	}
 }
 

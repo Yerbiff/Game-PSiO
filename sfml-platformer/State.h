@@ -17,6 +17,7 @@ protected:
 	std::map<std::string, int>* supportedKeys;
 	std::map<std::string, int> keybinds;
 	bool quit;
+	bool paused;
 
 	//Resorces
 	std::map<std::string,sf::Texture> textures;
@@ -33,6 +34,8 @@ public:
 	//virtual void endStateUpdate() = 0;
 
 	void endState();
+	void pauseState();
+	void unpauseState();
 
 	virtual void updateInput(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;

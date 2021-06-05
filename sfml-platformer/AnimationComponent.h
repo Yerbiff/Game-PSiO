@@ -14,6 +14,7 @@ private:
 		sf::Texture& textureSheet;
 		float animationTimer;
 		float timer;
+		bool done;
 		int width;
 		int height;
 		sf::IntRect startRect;
@@ -21,7 +22,7 @@ private:
 		sf::IntRect endRect;
 
 		Animation(sf::Sprite& sprite, sf::Texture& texture_sheet ,float animation_timer, int start_frame_x, int start_frame_y, int frames_x, int frames_y, int width, int height)
-			:sprite(sprite),textureSheet(texture_sheet), animationTimer(animation_timer), width(width), height(height)
+			:sprite(sprite),textureSheet(texture_sheet),timer(0.f), done(false), animationTimer(animation_timer), width(width), height(height)
 		{
 			this->timer = 0.f;
 			this->startRect = sf::IntRect(start_frame_x * width, start_frame_y * height, width, height);
@@ -32,10 +33,16 @@ private:
 			this->sprite.setTextureRect(this->startRect);
 		}
 
+		const bool& isDone() const 
+		{
+			return this->done;
+		}
+
 		//Functions
-		void play(const float& dt)
+		const bool& play(const float& dt)
 		{
 			//Update
+			this->done = false;
 			this->timer += 100.f * dt;
 			if (this->timer >= this->animationTimer)
 			{
@@ -50,10 +57,12 @@ private:
 				else //Reset
 				{
 					this->crrRect.left = this->startRect.left;
+					this->done = true; 
 				}
 
 				this->sprite.setTextureRect(this->crrRect);
 			}
+			return this->done;
 		}
 		void reset()
 		{
@@ -66,14 +75,17 @@ private:
 	sf::Texture& textureSheet;
 	std::map<std::string, Animation*> animations;
 	Animation* lastAnimation;
+	Animation* priorityAnimation;
 public:
 	AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
 	virtual ~AnimationComponent();
+
+	const bool& isDone(const std::string key);
 
 	//Functions
 	void addAnimation(const std::string key, float animation_timer, int start_frame_x, int start_frame_y, int frames_x, int frames_y, int width, int height);
 
 
-	void play(const std::string key, const float& dt);
+	const bool& play(const std::string key, const float& dt, const bool priority = false);
 };
 

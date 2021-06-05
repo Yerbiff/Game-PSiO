@@ -93,8 +93,8 @@ void Game::updateSFMLEvents()
 		if (this->event.type == sf::Event::Closed)
 			this->window->close();
 		//close on escape 
-		else if (this->event.type == sf::Event::KeyPressed && this->event.key.code == sf::Keyboard::Escape)
-			this->window->close();
+		//else if (this->event.type == sf::Event::KeyPressed && this->event.key.code == sf::Keyboard::Escape)
+			//this->window->close();
 		//this->updateMenu();
 
 	}
