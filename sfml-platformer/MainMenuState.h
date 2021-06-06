@@ -22,7 +22,6 @@ private:
 	void initKeybinds();
 	void initMenuitems();
 public:
-	MainMenuState();
 	MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~MainMenuState();
 
@@ -32,7 +31,7 @@ public:
 	//Functions
 	void MoveUp();
 	void MoveDown();
-	int GetPressedItem() { return selectedItemIndex_; }
+	int GetPressedItem();
 
 	void updateInput(const float& dt);
 	void update(const float& dt);

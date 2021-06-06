@@ -10,7 +10,9 @@ private:
 
 	sf::Font& font;
 	sf::Text pauseText;
-
+	sf::RectangleShape background;
+	int selectedItemIndex_;
+	sf::Text menu[MAX_NUMBER_OF_ITEMS];
 	//std::map<std::string, Button*> buttons;
 
 
@@ -19,6 +21,11 @@ public:
 	virtual ~PauseMenu();
 
 	//Function
+	void MoveUp();
+	void MoveDown();
+	const bool isItemPressed(const int num);
+	int GetPressedItem();
+
 	void update();
 	void render(sf::RenderTarget& target);
 };

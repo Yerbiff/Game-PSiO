@@ -104,7 +104,7 @@ void Game::update()
 {
 	this->updateSFMLEvents();
 
-	if (!this->states.empty())
+	if (!this->states.empty() && this->window->hasFocus())
 	{
 		this->states.top()->update(this->dt);
 		if (this->states.top()->getQuit())
@@ -132,7 +132,7 @@ void Game::updateDt()
 
 void Game::render()
 {
-	this->window->clear(sf::Color::Black);
+	this->window->clear(sf::Color(21,108,153,255));
 
 	//Render Game here
 	if (!this->states.empty())

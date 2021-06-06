@@ -28,6 +28,9 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{39632ef0-b4ef-4f9f-8081-2b5b47b943c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{e72a66c3-8cc6-46be-88d7-dc4ec49ad45a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -70,6 +73,9 @@
       <Filter>Tile</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -117,6 +123,9 @@
       <Filter>Tile</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

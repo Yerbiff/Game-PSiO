@@ -5,6 +5,7 @@ class Player :
 {
 private:
     bool atacking;
+    bool picking;
 
     void initVariables();
     void initComponents();
@@ -14,6 +15,7 @@ public:
 
     //Function
     void updateAttack();
+    void updatePick();
     void updateAnimation(const float& dt);
     virtual void update(const float& dt);
 };

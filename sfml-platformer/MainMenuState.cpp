@@ -91,6 +91,12 @@ void MainMenuState::MoveDown()
 	}
 }
 
+int MainMenuState::GetPressedItem()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("ENTER"))))
+		return selectedItemIndex_; 
+}
+
 void MainMenuState::updateInput(const float& dt)
 {
 
@@ -98,11 +104,9 @@ void MainMenuState::updateInput(const float& dt)
 		this->MoveUp();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
 		this->MoveDown();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("ENTER"))))
 		switch (this->GetPressedItem())
 		{
 		case 0:
-
 			//Przejscie do menu z wyborem poziomu trudnoœci
 			this->states->push(new GameState(this->window, this->supportedKeys, this->states));
 			break;
