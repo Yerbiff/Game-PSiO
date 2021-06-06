@@ -54,7 +54,7 @@ void GameState::initPlayers()
 
 void GameState::initTileMap()
 {
-	this->tileMap = new TileMap(32,3200,3200,"Resources/Images/Tiles/tilesheet1.png");
+	this->tileMap = new TileMap(32,100,100,"Resources/Images/Tiles/tilesheet1.png");
 	this->tileMap->loadFromFile("text.slmp");
 }
 
@@ -125,7 +125,7 @@ void GameState::updatePausedItems()
 void GameState::updateTileMap(const float& dt)
 {
 	this->tileMap->update();
-	this->tileMap->updateCollision(this->player);
+	this->tileMap->updateCollision(this->player, dt);
 }
 
 void GameState::update(const float& dt)
@@ -139,9 +139,9 @@ void GameState::update(const float& dt)
 
 		this->updatePlayerInput(dt);
 
-		this->player->update(dt);
-		
 		this->updateTileMap(dt);
+
+		this->player->update(dt);
 	}
 	else 
 	{
@@ -157,7 +157,7 @@ void GameState::render(sf::RenderTarget* target)
 		target = this->window;
 	
 	target->setView(this->view);
-	this->tileMap->render(*target);
+	this->tileMap->render(*target, this->player);
 
 	this->player->render(*target);
 

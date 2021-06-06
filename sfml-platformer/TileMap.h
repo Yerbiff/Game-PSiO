@@ -15,24 +15,30 @@ class TileMap
 private:
 	void clear();
 	float gridSizeF;
-	unsigned gridSizeU;
-	unsigned layers;
+	int gridSizeI;
+	int layers;
 	std::string textureFile;
-	sf::Vector2u maxSizeWorldGrid;
+	sf::Vector2i maxSizeWorldGrid;
 	sf::Vector2f maxSizeWorldF;
 	std::vector<std::vector<std::vector<Tile*>>> map;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox;
 	
+	//Culling
+	int fromX;
+	int toX;
+	int fromY;
+	int toY;
+	int layer;
 public:
-	TileMap(float gridSize, unsigned width, unsigned height, std::string texture_file);
+	TileMap(float gridSize, int width, int height, std::string texture_file);
 	virtual ~TileMap();
 
 	const sf::Texture* getTileSheet() const;
 
 	void loadFromFile(const std::string file_name);
 
-	void updateCollision(Entity* entity);
+	void updateCollision(Entity* entity, const float& dt);
 
 	void update();
 	void render(sf::RenderTarget& target, Entity* entity = NULL);

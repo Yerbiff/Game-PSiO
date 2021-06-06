@@ -47,11 +47,27 @@ const sf::Vector2f& Entity::getPosition() const
 		return this->sprite.getPosition();
 }
 
+const sf::Vector2u Entity::getGridPosition(const unsigned gridSizeU) const
+{
+	if (this->hitboxComponent)
+		return sf::Vector2u(static_cast<unsigned>(this->hitboxComponent->getPosition().x) / gridSizeU, static_cast<unsigned>(this->hitboxComponent->getPosition().y) / gridSizeU);
+	else
+		return sf::Vector2u(static_cast<unsigned>(this->sprite.getPosition().x) / gridSizeU, static_cast<unsigned>(this->sprite.getPosition().y) / gridSizeU);
+}
+
 const sf::FloatRect Entity::getGlobalBounds() const
 {
 	if (this->hitboxComponent)
 		return this->hitboxComponent->getGlobalBounds();
 	return this->sprite.getGlobalBounds();
+}
+
+const sf::FloatRect& Entity::getNextPositionBounds(const float& dt) const
+{
+	if (this->hitboxComponent && this->movmentComponent)
+		return this->hitboxComponent->getNextPosition(this->movmentComponent->getVelocity() * dt);
+
+	return sf::FloatRect();
 }
 
 void Entity::setPosition(const float x, const float y)
@@ -71,6 +87,24 @@ void Entity::move(const float dir_x, const float dir_y, const float& dt)
 void Entity::scale(sf::Vector2f scale)
 {
 	this->sprite.setScale(scale);
+}
+
+void Entity::stopVelocity()
+{
+	if (this->movmentComponent)
+		this->movmentComponent->stopVelocity();
+}
+
+void Entity::stopVelocityX()
+{
+	if (this->movmentComponent)
+		this->movmentComponent->stopVelocityX();
+}
+
+void Entity::stopVelocityY()
+{
+	if (this->movmentComponent)
+		this->movmentComponent->stopVelocityY();
 }
 
 void Entity::update(const float& dt)

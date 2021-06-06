@@ -76,7 +76,7 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Header Files</Filter>
+      <Filter>Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +126,7 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Tile</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
