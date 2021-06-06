@@ -26,12 +26,15 @@ public:
 
 
 	virtual const sf::Vector2f& getPosition() const;
-	//Functions
+	virtual const sf::FloatRect getGlobalBounds() const;
+
 	virtual void setPosition(const float x, const float y);
+	//Functions
+	
 	virtual void move(const float x, const float y, const float& dt);
 	virtual void scale(sf::Vector2f scale);
 
-	virtual void update(const float& dt);
-	virtual void render(sf::RenderTarget& terget);
+	virtual void update(const float& dt = 0);
+	virtual void render(sf::RenderTarget& terget) = 0;
 };
 

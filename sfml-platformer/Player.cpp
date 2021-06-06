@@ -97,3 +97,11 @@ void Player::update(const float& dt)
 	
 	this->hitboxComponent->update();
 }
+
+void Player::render(sf::RenderTarget& target)
+{
+	target.draw(this->sprite);
+
+	if (this->hitboxComponent)
+		this->hitboxComponent->render(target);
+}

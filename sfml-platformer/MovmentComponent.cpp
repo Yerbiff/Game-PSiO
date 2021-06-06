@@ -39,6 +39,20 @@ const bool MovmentComponent::getState(const short unsigned state) const
 	return false;
 }
 
+void MovmentComponent::stopVelocity()
+{
+	this->velocity.x = 0.f;
+	this->velocity.y = 0.f;
+}
+void MovmentComponent::stopVelocityX()
+{
+	this->velocity.x = 0.f;
+}
+void MovmentComponent::stopVelocityY()
+{
+	this->velocity.y = 0.f;
+}
+
 void MovmentComponent::move(const float dir_x, const float dir_y, const float& dt)//const float& dt
 {
 	//acceleration
