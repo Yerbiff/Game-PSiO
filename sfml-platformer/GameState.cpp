@@ -4,8 +4,8 @@
 
 void GameState::intiView()
 {
-	this->view.setSize(sf::Vector2f(500,350));
-	this->view.setCenter(sf::Vector2f(800 / 2.f, 650 / 2.f));
+	this->view.setSize(sf::Vector2f(960,500));
+	this->view.setCenter(sf::Vector2f(1920 / 2.f, 1080 / 2.f));
 }
 
 void GameState::initKeybinds()
@@ -86,7 +86,7 @@ void GameState::updateView(const float& dt)
 void GameState::updateInput(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime())
-	{
+	{	
 		if (!this->paused)
 		{
 			this->pauseState();
@@ -155,8 +155,9 @@ void GameState::render(sf::RenderTarget* target)
 {
 	if (!target)
 		target = this->window;
-	
+
 	target->setView(this->view);
+
 	this->tileMap->render(*target, this->player);
 
 	this->player->render(*target);

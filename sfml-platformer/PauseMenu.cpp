@@ -4,7 +4,6 @@
 PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& font) 
 	: font(font)
 {
-
 	this->backgroud.setSize(sf::Vector2f(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
 	this->backgroud.setFillColor(sf::Color(20, 20, 20, 100));
 
@@ -16,17 +15,20 @@ PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& font)
 	this->pauseText.setFont(font);
 	this->pauseText.setFillColor(sf::Color(255, 255, 255, 200));
 	this->pauseText.setString("PAUSED");
+	this->pauseText.setCharacterSize(60);
 	this->pauseText.setPosition(this->container.getPosition().x + this->container.getSize().x / 2.f - this->pauseText.getGlobalBounds().width / 2.f, this->container.getPosition().y + 20.f);
 
 
 	this->menu[0].setFont(font);
 	this->menu[0].setFillColor(sf::Color::White);
 	this->menu[0].setString("Continue");
+	this->menu[0].setCharacterSize(40);
 	this->menu[0].setPosition(this->container.getPosition().x + this->container.getSize().x / 2.f - this->pauseText.getGlobalBounds().width / 2.f, window.getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 1);
 
 	this->menu[1].setFont(font);
 	this->menu[1].setFillColor(sf::Color(128, 128, 128, 200));
 	this->menu[1].setString("Quit");
+	this->menu[1].setCharacterSize(40);
 	this->menu[1].setPosition(this->container.getPosition().x + this->container.getSize().x / 2.f - this->pauseText.getGlobalBounds().width / 2.f, window.getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2);
 
 	selectedItemIndex_ = 0;
@@ -72,6 +74,7 @@ void PauseMenu::update()
 
 void PauseMenu::render(sf::RenderTarget& target)
 {
+	target.draw(this->pauseText);
 	target.draw(this->backgroud);
 	target.draw(this->container);
 
@@ -79,5 +82,5 @@ void PauseMenu::render(sf::RenderTarget& target)
 	{
 		target.draw(this->menu[i]);
 	}
-	target.draw(this->pauseText);
+
 }

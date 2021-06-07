@@ -47,11 +47,13 @@ void MainMenuState::initMenuitems()
 	this->menu[0].setFont(font);
 	this->menu[0].setFillColor(sf::Color::White);
 	this->menu[0].setString("New Game");
+	this->menu[0].setCharacterSize(60);
 	this->menu[0].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 1));
 
 	this->menu[1].setFont(font);
 	this->menu[1].setFillColor(sf::Color(128, 128, 128, 200));
 	this->menu[1].setString("Exit");
+	this->menu[1].setCharacterSize(60);
 	this->menu[1].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2));
 
 	selectedItemIndex_ = 0;
