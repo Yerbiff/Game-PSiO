@@ -5,6 +5,7 @@ void Player::initVariables()
 {
 	atacking = false;
 	picking = false;
+	this->hunger = 100;
 }
 
 void Player::initComponents()
@@ -18,14 +19,14 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 
 	this->setPosition(x, y);
 
-	this->createMovmentComponent(175.f, 15.f, 5.f);
+	this->createMovmentComponent(175.f, 1500.f, 500.f);
 	this->createAnimationComponent(texture_sheet);
 	this->createHitboxComponent(this->sprite, 12.f, 16.f, 32.f, 40.f);
 
 	this->animationComponent->addAnimation("IDLE", 11.f, 0, 0, 12, 0, 32, 32);
 	this->animationComponent->addAnimation("WALK", 8.f, 0, 1 , 7, 1 , 32, 32);
 	this->animationComponent->addAnimation("ATTACK", 5.f, 0, 4, 8, 4, 32, 31);
-	this->animationComponent->addAnimation("PICK", 10.f, 0, 7, 6, 7, 32, 32);
+	this->animationComponent->addAnimation("PICK", 10.f, 0, 7, 4, 7, 32, 32);
 }
 
 Player::~Player()
@@ -81,6 +82,14 @@ void Player::updateAnimation(const float& dt)
 			this->sprite.setOrigin(29.f, 0.f);
 			this->sprite.setScale(-1.8, 1.8);
 		}
+		this->animationComponent->play("WALK", dt);
+	}
+	else if (this->movmentComponent->getState(MOVING_UP))
+	{
+		this->animationComponent->play("WALK", dt);
+	}
+	else if (this->movmentComponent->getState(MOVING_DOWN))
+	{
 		this->animationComponent->play("WALK", dt);
 	}
 }

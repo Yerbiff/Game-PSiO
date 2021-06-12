@@ -25,6 +25,7 @@ void GameState::initKeybinds()
 
 	ifs.close();
 }
+
 void GameState::initFonts()
 {
 	if (!this->font.loadFromFile("Fonts/arial.ttf"))
@@ -54,10 +55,49 @@ void GameState::initPlayers()
 
 void GameState::initTileMap()
 {
-	this->tileMap = new TileMap(32,100,100,"Resources/Images/Tiles/tilesheet1.png");
+	this->tileMap = new TileMap(32,11,11,"Resources/Images/Tiles/tilesheet1.png");
 	this->tileMap->loadFromFile("text.slmp");
 }
+void GameState::initStatus()
+{
+	this->clock.setPosition(1660, 25);
+	this->clock.setFillColor(sf::Color::Yellow);
+	this->clock.setRadius(50);
+	this->clock.setOutlineColor(sf::Color::Black);
+	this->clock.setOutlineThickness(1.f);
+	//this->status.emplace_back(clock);
 
+	this->health.setPosition(1440, 25);
+	this->health.setRadius(50);
+	this->health.setOutlineColor(sf::Color::Black);
+	this->health.setOutlineThickness(1.f);
+	//this->status.emplace_back(health);
+
+	this->hunger.setPosition(1550, 25);
+	this->hunger.setFillColor(sf::Color::Magenta);
+	this->hunger.setRadius(50);
+	this->hunger.setOutlineColor(sf::Color::Black);
+	this->hunger.setOutlineThickness(1.f);
+	//this->status.emplace_back(hunger);
+
+	this->day.setFont(font);
+	this->day.setFillColor(sf::Color(255, 255, 255, 200));
+	this->day.setPosition(1810, 55);
+	//this->status_text.emplace_back(day);
+
+this->hp.setFont(font);
+this->hp.setFillColor(sf::Color(255, 255, 255, 200));
+this->hp.setString(std::to_string(this->player->hp));
+this->hp.setPosition(1470, 55);
+//this->status_text.emplace_back(hp);
+
+this->hunger_lv.setFont(font);
+this->hunger_lv.setFillColor(sf::Color(255, 255, 255, 200));
+this->hunger_lv.setString(std::to_string(this->player->hunger));
+this->hunger_lv.setPosition(1580, 55);
+//this->status_text.emplace_back(hunger_lv);
+
+}
 GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
 	: State(window, supportedKeys, states)
 {
@@ -67,8 +107,16 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	this->initTextures();
 	this->initPauseMenu();
 
+
+	this->temp_t = 0;
+	this->temp_t2 = 0;
+	this->days = 0;
+
 	this->initPlayers();
+	this->initStatus();
 	this->initTileMap();
+
+
 }
 
 GameState::~GameState()
@@ -86,13 +134,16 @@ void GameState::updateView(const float& dt)
 void GameState::updateInput(const float& dt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime())
-	{	
+	{
 		if (!this->paused)
 		{
 			this->pauseState();
 		}
 		else
+		{
+			//this->player->hp -= 10;
 			this->unpauseState();
+		}
 	}
 }
 
@@ -126,6 +177,84 @@ void GameState::updateTileMap(const float& dt)
 {
 	this->tileMap->update();
 	this->tileMap->updateCollision(this->player, dt);
+	if (temp_t == 0)
+		temp_t = this->time;
+	if (abs(temp_t - this->time) >= 1)
+	{
+		this->tileMap->updateDamaging(this->player);
+		temp_t = 0;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X) && this->getKeytime())
+	{
+		this->tileMap->updatePicking(this->player);
+	}
+	
+}
+void GameState::updateStatus(const float& dt)
+{
+	if (this->player->hp <= 0)
+		this->player->hp = 0;
+	switch (this->player->hp)
+	{
+	case 0:
+		this->health.setFillColor(sf::Color::Black);
+		break;
+	case 10:
+		this->health.setFillColor(sf::Color(128, 0, 0, 255));
+		break;
+	case 20:
+		this->health.setFillColor(sf::Color(139, 0, 0, 255));
+		break;
+	case 30:
+		this->health.setFillColor(sf::Color(178, 34, 34, 255));
+		break;
+	case 40:
+		this->health.setFillColor(sf::Color(205, 92, 92, 255));
+		break;
+	case 50:
+		this->health.setFillColor(sf::Color(205, 92, 92, 255));
+		break;
+	case 60:
+		this->health.setFillColor(sf::Color(240, 128, 128, 255));
+		break;
+	case 70:
+		this->health.setFillColor(sf::Color(240, 128, 128, 255));
+		break;
+	case 80:
+		this->health.setFillColor(sf::Color(220, 20, 60, 255));
+		break;
+	case 90:
+		this->health.setFillColor(sf::Color(220, 20, 60, 255));
+		break;
+	case 100:
+		this->health.setFillColor(sf::Color(255, 0, 0, 255));
+		break;
+	}
+
+	this->day.setString("Day " + std::to_string(this->days));
+
+	this->hp.setString(std::to_string(this->player->hp));
+	if (this->player->hunger <= 0)
+		this->player->hunger = 0;
+	if (this->player->hunger == 0)
+	{
+		if (temp_t2 == 0)
+			temp_t2 = this->time2;
+		if (abs(temp_t2 - this->time2) >= 5)
+		{
+			this->player->hp -= 5;;
+			temp_t2 = 0;
+		}
+	}
+	else
+	{
+		if (this->time2 / 60 >= 2)
+		{
+			this->player->hunger -= 10;
+			this->time2 = 0;
+		}
+	}
+	this->hunger_lv.setString(std::to_string(this->player->hunger));
 }
 
 void GameState::update(const float& dt)
@@ -135,6 +264,7 @@ void GameState::update(const float& dt)
 
 	if (!this->paused)//unpaused
 	{
+		
 		this->updateView(dt);
 
 		this->updatePlayerInput(dt);
@@ -142,29 +272,75 @@ void GameState::update(const float& dt)
 		this->updateTileMap(dt);
 
 		this->player->update(dt);
+
+		this->updateStatus(dt);
+
+		this->timeCounter(dt);
+		if (this->time / 60 >= 3 && this->time / 60 <= 9)
+		{
+			tileMap->a = 8;
+			tileMap->b = 13;
+			//this->time = 0;
+		}
+		if (this->time / 60 >= 9)
+		{
+			tileMap->a = 2;
+			tileMap->b = 3;
+			this->time = 0;
+			days++;
+		}
+		std::cout << this->time << std::endl;
+		
+		
+		
 	}
 	else 
 	{
 		this->pmenu->update();
 		this->updatePausedItems();
+
 	}
 
 }
 
 void GameState::render(sf::RenderTarget* target)
 {
-	if (!target)
-		target = this->window;
-
-	target->setView(this->view);
-
-	this->tileMap->render(*target, this->player);
-
-	this->player->render(*target);
-
-	if (this->paused)//Pause menu
+	if (this->player->hp > 0)
 	{
-		target->setView(this->window->getDefaultView());
-		this->pmenu->render(*target);
+		if (!target)
+			target = this->window;
+
+
+		target->setView(this->window->getDefaultView()); //XD
+
+		target->draw(clock);
+		target->draw(health);
+		target->draw(hunger);
+
+		target->draw(day);
+		target->draw(hp);
+		target->draw(hunger_lv);
+
+		target->setView(this->view);
+
+		this->tileMap->render(*target, this->player);
+
+		this->player->render(*target);
+
+		this->tileMap->renderDeferred(*target);
+
+		if (this->paused)//Pause menu
+		{
+			target->setView(this->window->getDefaultView());
+			this->pmenu->render(*target);
+		}
 	}
+	else
+	{
+		std::cout << "You have lived for "+ std::to_string(days) + " day/s";
+		target->setView(this->window->getDefaultView());
+		this->endState();
+	}
+
 }
+

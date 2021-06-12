@@ -4,6 +4,7 @@
 void Entity::initVariables()
 {
 	this->movmentComponent = NULL;
+	this->hp = 100;
 }
 
 Entity::Entity()

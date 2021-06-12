@@ -9,9 +9,14 @@ private:
 
     void initVariables();
     void initComponents();
+
+    
 public:
     Player(float x, float y, sf::Texture& texture_sheet);
     virtual ~Player();
+
+    //Variables
+    int hunger;
 
     //Function
     void updateAttack();

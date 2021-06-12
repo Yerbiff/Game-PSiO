@@ -20,6 +20,8 @@ protected:
 	bool paused;
 	float keytime;
 	float keytimeMax;
+	float time;
+	float time2;
 
 	//Resorces
 	std::map<std::string,sf::Texture> textures;
@@ -40,6 +42,7 @@ public:
 	void pauseState();
 	void unpauseState();
 
+	virtual void timeCounter(const float& dt);
 	virtual void updateKeytime(const float& dt);
 	virtual void updateInput(const float& dt) = 0;
 	virtual void update(const float& dt) = 0;

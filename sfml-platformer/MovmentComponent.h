@@ -5,6 +5,8 @@ enum movment_states {
 	MOVING,
 	MOVING_LEFT,
 	MOVING_RIGHT,
+	MOVING_UP,
+	MOVING_DOWN
 };
 
 class MovmentComponent

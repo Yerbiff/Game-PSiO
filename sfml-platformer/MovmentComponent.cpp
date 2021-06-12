@@ -35,6 +35,14 @@ const bool MovmentComponent::getState(const short unsigned state) const
 		if (this->velocity.x > 0.f)
 			return true;
 		break;
+	case MOVING_UP:
+		if (this->velocity.y < 0.f)
+			return true;
+		break;
+	case MOVING_DOWN:
+		if (this->velocity.y > 0.f)
+			return true;
+		break;
 	}
 	return false;
 }
@@ -56,9 +64,9 @@ void MovmentComponent::stopVelocityY()
 void MovmentComponent::move(const float dir_x, const float dir_y, const float& dt)//const float& dt
 {
 	//acceleration
-	this->velocity.x += this->accelaretion* dir_x;
+	this->velocity.x += this->accelaretion* dir_x * dt;
 
-	this->velocity.y += this->accelaretion * dir_y;
+	this->velocity.y += this->accelaretion * dir_y * dt;
 
 	
 }
@@ -73,7 +81,7 @@ void MovmentComponent::update(const float& dt)
 			this->velocity.x = this->maxVelocity;
 
 		//Deceleration x positive
-		this->velocity.x -= deceleration;
+		this->velocity.x -= deceleration * dt;
 		if (this->velocity.x < 0.f)
 			this->velocity.x = 0.f;
 
@@ -85,7 +93,7 @@ void MovmentComponent::update(const float& dt)
 			this->velocity.x = -this->maxVelocity;
 
 		//Deceleration x negative
-		this->velocity.x += deceleration;
+		this->velocity.x += deceleration * dt;
 		if(this->velocity.x > 0.f)
 			this->velocity.x = 0.f;
 	}
@@ -96,7 +104,7 @@ void MovmentComponent::update(const float& dt)
 			this->velocity.y = this->maxVelocity;
 
 		//Deceleration y positive
-		this->velocity.y -= deceleration;
+		this->velocity.y -= deceleration * dt;
 		if (this->velocity.y < 0.f)
 			this->velocity.y = 0.f;
 
@@ -108,7 +116,7 @@ void MovmentComponent::update(const float& dt)
 			this->velocity.y = -this->maxVelocity;
 
 		//Deceleration y negative
-		this->velocity.y += deceleration;
+		this->velocity.y += deceleration * dt;
 		if (this->velocity.y > 0.f)
 			this->velocity.y = 0.f;
 	}

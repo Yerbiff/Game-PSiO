@@ -19,6 +19,18 @@ private:
 	sf::View view;
 	sf::RenderTexture renderTexture;
 	sf::Sprite renderSprite;
+	std::vector<sf::CircleShape> status;
+	sf::CircleShape clock;
+	sf::CircleShape health;
+	sf::CircleShape hunger;
+	std::vector<sf::Text> status_text;
+	sf::Text hp;
+	sf::Text hunger_lv;
+	sf::Text day;
+
+	int temp_t;
+	int temp_t2;
+	int days;
 
 	sf::Font font;
 	PauseMenu* pmenu;
@@ -29,6 +41,7 @@ private:
 
 	//Functions
 	void intiView();
+	void initStatus();
 	void initKeybinds();
 	void initFonts();
 	void initTextures();
@@ -44,6 +57,7 @@ public:
 	void updatePlayerInput(const float& dt);
 	void updatePausedItems();
 	void updateTileMap(const float& dt);
+	void updateStatus(const float& dt);
 	void update(const float& dt);
 	void render(sf::RenderTarget* target = nullptr);
 };

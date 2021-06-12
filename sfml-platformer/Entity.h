@@ -19,6 +19,8 @@ public:
 	virtual ~Entity();
 
 	//
+	int hp;
+
 	void setTexture(sf::Texture& texture);
 	void createMovmentComponent(const float maxVelocity, const float acceleration, const float deceleration);
 	void createAnimationComponent(sf::Texture& texture_sheet);
