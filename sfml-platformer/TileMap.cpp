@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "TileMap.h"
-
+#include <iostream>
+#include <fstream>
+#include <conio.h>
+#include <string>
 void TileMap::clear()
 {
 	for (int x = 0; x < this->maxSizeWorldGrid.x; x++)
@@ -40,8 +43,8 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 	this->fromY = 0;
 	this->toY = 0;
 	this->layer = 0;
-	this->a = 8;
-	this->b = 13;
+	this->a = 15;
+	this->b = 20;
 
 	this->map.resize(this->maxSizeWorldGrid.x, std::vector<std::vector<std::vector<Tile*>>>());
 	for (int x = 0; x < this->maxSizeWorldGrid.x; x++)
@@ -148,9 +151,13 @@ void TileMap::loadFromFile(const std::string file_name)
 		}
 
 		//Load all tiles
+		//int j = 0;
 		while (in_file >> x >> y >> z >> trX >> trY >> collison >> type)
 		{
+			//this->texture_x_y[j] = std::to_string(trX);
 			this->map[x][y][z].push_back(new Tile(x, y, this->gridSizeF, this->tileSheet, sf::IntRect(trX, trY, this->gridSizeI, this->gridSizeI), collison, type));
+			
+			//j++;
 		}
 	}
 	else
@@ -291,7 +298,6 @@ void TileMap::updateDamaging(Entity* entity)
 
 				if (playerBounds.intersects(wallBounds))
 				{
-					std::cout<<"cout";
 					entity->hp -= 10;;
 				}
 			}
@@ -299,7 +305,7 @@ void TileMap::updateDamaging(Entity* entity)
 		}
 	}
 }
-void TileMap::updatePicking(Entity* entity)
+int TileMap::updatePicking(Entity* entity)
 {
 	for (int x = this->fromX; x < this->toX; x++)
 	{
@@ -313,17 +319,48 @@ void TileMap::updatePicking(Entity* entity)
 					wallBounds = this->map[x][y][this->layer][k]->getGlobalBounds();
 				//sf::FloatRect nextPositionBounds = entity->getNextPositionBounds(dt);
 
-				if (playerBounds.intersects(wallBounds))
+				if (playerBounds.intersects(wallBounds) && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
 				{
-					//Usuwanie przedmiotu z ziemi
-						
-					//
-					std::cout << "Picked";
+				
+					this->map[x][y][this->layer][k]->deleteTile();
+					switch (this->map[x][y][this->layer][k]->getTextureRect().left)
+					{
+					case MARCHEWKAX:
+						if (this->map[x][y][this->layer][k]->getTextureRect().top == MARCHEWKAY)
+						{
+										
+							return 3;
+						}
+						break;
+					case ZIEMNIAKX:
+						if (this->map[x][y][this->layer][k]->getTextureRect().top == ZIEMNIAKY)
+						{
+										
+							return 4;
+						}
+						break;
+					case PATYKX:
+						if (this->map[x][y][this->layer][k]->getTextureRect().top == PATYKY)
+						{
+										
+							return 1;
+						}
+						break;
+					case KAMIENX:
+						if (this->map[x][y][this->layer][k]->getTextureRect().top == KAMIENY)
+						{
+										
+							return 2;
+						}
+						break;
+					}
+					
+
 				}
 			}
-
 		}
 	}
+	return 0;
 }
 
 

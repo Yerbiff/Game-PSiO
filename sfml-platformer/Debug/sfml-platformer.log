@@ -1,29 +1,15 @@
-﻿  Entity.cpp
-  Game.cpp
-  GameState.cpp
+﻿  GameState.cpp
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(52,48): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(52,34): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(53,43): warning C4305: "argument": obcięcie z "double" do "T"
           with
           [
               T=float
           ]
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(176,16): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(234,17): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(244,17): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-  MainMenuState.cpp
-  Player.cpp
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\Player.cpp(74,34): warning C4305: "argument": obcięcie z "double" do "float"
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\Player.cpp(83,35): warning C4305: "argument": obcięcie z "double" do "float"
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(197,16): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(291,18): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+  Inventory.cpp
   State.cpp
-  TileMap.cpp
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(12,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(81,18): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(83,19): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(85,28): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(223,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(284,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(340,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-  main.cpp
   Generowanie kodu...
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\MainMenuState.cpp(100): warning C4715: "MainMenuState::GetPressedItem”: niewszystkie ścieżki kodu zwracają wartość
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\Entity.cpp(71): warning C4172: zwracanie adresu lokalnej zmiennej lub tymczasowej
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\Inventory.cpp(171): warning C4715: "Inventory::GetPressedItem”: niewszystkie ścieżki kodu zwracają wartość
   sfml-platformer.vcxproj -> C:\Users\Jarek\Documents\Game-PSiO\Debug\sfml-platformer.exe

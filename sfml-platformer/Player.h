@@ -16,7 +16,7 @@ public:
     virtual ~Player();
 
     //Variables
-    int hunger;
+    //int hunger;
 
     //Function
     void updateAttack();

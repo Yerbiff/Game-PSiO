@@ -4,10 +4,12 @@
 #include "Entity.h"
 #include "PauseMenu.h"
 #include "TileMap.h"
+#include "Inventory.h"
 
 class PauseMenu;
 class Player;
 class TileMap;
+class Inventory;
 class sf::View;
 class sf::Font;
 class sf::RenderTexture;
@@ -35,6 +37,7 @@ private:
 	sf::Font font;
 	PauseMenu* pmenu;
 	Player* player;
+	Inventory* eq;
 
 	TileMap* tileMap;
 	//sf::Texture texture;
@@ -42,6 +45,7 @@ private:
 	//Functions
 	void intiView();
 	void initStatus();
+	void initEq();
 	void initKeybinds();
 	void initFonts();
 	void initTextures();

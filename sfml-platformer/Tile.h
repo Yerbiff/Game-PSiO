@@ -7,6 +7,8 @@ enum TileTypes {
 	PICKABLE
 };
 
+
+
 class Tile
 {
 private:
@@ -25,6 +27,9 @@ public:
 	const bool& getCollision()const;
 	const sf::Vector2f& getPosition()const;
 	const sf::FloatRect getGlobalBounds()const;
+	const sf::IntRect getTextureRect() const;
+
+	void deleteTile();
 	const bool intersects(const sf::FloatRect bounds)const;
 
 	void update();

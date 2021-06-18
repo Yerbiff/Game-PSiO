@@ -132,7 +132,7 @@ void Game::updateDt()
 
 void Game::render()
 {
-	this->window->clear(sf::Color(21,108,153,255));
+	this->window->clear(sf::Color::Black);
 
 	//Render Game here
 	if (!this->states.empty())

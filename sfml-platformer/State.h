@@ -19,6 +19,7 @@ protected:
 	bool quit;
 	bool paused;
 	float keytime;
+	float keytime1;
 	float keytimeMax;
 	float time;
 	float time2;
@@ -35,6 +36,7 @@ public:
 
 	const bool& getQuit() const;
 	const bool getKeytime();
+	const bool getKeytime1();
 	//virtual void endStateUpdate() = 0;
 
 	//Functions

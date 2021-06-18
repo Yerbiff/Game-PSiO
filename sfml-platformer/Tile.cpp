@@ -16,6 +16,7 @@ Tile::Tile(int grid_x, int grid_y, float gridSizeF, const sf::Texture& texture, 
 	this->shape.setPosition(static_cast<float>(grid_x) * gridSizeF, static_cast<float>(grid_y) * gridSizeF);
 	this->shape.setTexture(&texture);
 	this->shape.setTextureRect(texture_rect);
+	
 
 	this->collision = collison;
 	this->type = type;
@@ -44,6 +45,16 @@ const sf::Vector2f& Tile::getPosition() const
 const sf::FloatRect Tile::getGlobalBounds() const
 {
 	return this->shape.getGlobalBounds();
+}
+
+const sf::IntRect Tile::getTextureRect() const
+{
+	return this->shape.getTextureRect();
+}
+
+void Tile::deleteTile()
+{
+	this->shape.move(10000000,1000000000);
 }
 
 const bool Tile::intersects(const sf::FloatRect bounds) const

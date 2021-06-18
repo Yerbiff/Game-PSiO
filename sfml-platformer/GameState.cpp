@@ -4,7 +4,7 @@
 
 void GameState::intiView()
 {
-	this->view.setSize(sf::Vector2f(960,500));
+	this->view.setSize(sf::Vector2f(675,450));
 	this->view.setCenter(sf::Vector2f(1920 / 2.f, 1080 / 2.f));
 }
 
@@ -49,14 +49,21 @@ void GameState::initPauseMenu()
 
 void GameState::initPlayers()
 {
-	this->player = new Player(0, 0, this->textures["PLAYER_SHEET"]);
+	this->player = new Player(rand()% 999, rand() % 999, this->textures["PLAYER_SHEET"]);
 	this->player->scale(sf::Vector2f(1.8, 1.8));
 }
 
 void GameState::initTileMap()
 {
-	this->tileMap = new TileMap(32,11,11,"Resources/Images/Tiles/tilesheet1.png");
+	this->tileMap = new TileMap(32,100,100,"Resources/Images/Tiles/tilesheet1.png");
 	this->tileMap->loadFromFile("text.slmp");
+}
+void GameState::initEq()
+{
+	this->eq = new Inventory(*this->window,this->font);
+	//load items from file
+
+	//
 }
 void GameState::initStatus()
 {
@@ -85,19 +92,20 @@ void GameState::initStatus()
 	this->day.setPosition(1810, 55);
 	//this->status_text.emplace_back(day);
 
-this->hp.setFont(font);
-this->hp.setFillColor(sf::Color(255, 255, 255, 200));
-this->hp.setString(std::to_string(this->player->hp));
-this->hp.setPosition(1470, 55);
-//this->status_text.emplace_back(hp);
+	this->hp.setFont(font);
+	this->hp.setFillColor(sf::Color(255, 255, 255, 200));
+	this->hp.setString(std::to_string(this->player->hp));
+	this->hp.setPosition(1470, 55);
+	//this->status_text.emplace_back(hp);
 
-this->hunger_lv.setFont(font);
-this->hunger_lv.setFillColor(sf::Color(255, 255, 255, 200));
-this->hunger_lv.setString(std::to_string(this->player->hunger));
-this->hunger_lv.setPosition(1580, 55);
-//this->status_text.emplace_back(hunger_lv);
+	this->hunger_lv.setFont(font);
+	this->hunger_lv.setFillColor(sf::Color(255, 255, 255, 200));
+	this->hunger_lv.setString(std::to_string(this->player->hunger));
+	this->hunger_lv.setPosition(1580, 55);
+	//this->status_text.emplace_back(hunger_lv);
 
 }
+
 GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
 	: State(window, supportedKeys, states)
 {
@@ -110,20 +118,24 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 
 	this->temp_t = 0;
 	this->temp_t2 = 0;
-	this->days = 0;
+	this->days = 1;
 
 	this->initPlayers();
-	this->initStatus();
 	this->initTileMap();
+	this->initEq();
+	this->initStatus();
 
 
 }
+
+
 
 GameState::~GameState()
 {
 	delete this->pmenu;
 	delete this->player;
 	delete this->tileMap;
+	delete this->eq;
 }
 
 void GameState::updateView(const float& dt)
@@ -133,7 +145,7 @@ void GameState::updateView(const float& dt)
 
 void GameState::updateInput(const float& dt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime())
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime())//&& this->getKeytime()
 	{
 		if (!this->paused)
 		{
@@ -145,6 +157,10 @@ void GameState::updateInput(const float& dt)
 			this->unpauseState();
 		}
 	}
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::I) && this->getKeytime())
+	{
+		
+	}*/
 }
 
 void GameState::updatePlayerInput(const float& dt)
@@ -186,7 +202,7 @@ void GameState::updateTileMap(const float& dt)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X) && this->getKeytime())
 	{
-		this->tileMap->updatePicking(this->player);
+		this->eq->addItem(this->tileMap->updatePicking(this->player));
 	}
 	
 }
@@ -230,6 +246,39 @@ void GameState::updateStatus(const float& dt)
 		this->health.setFillColor(sf::Color(255, 0, 0, 255));
 		break;
 	}
+	switch (static_cast<int>((this->time/60)))
+	{
+	case 0:
+		this->clock.setFillColor(sf::Color(255, 255, 0));
+		break;
+	case 1:
+		this->clock.setFillColor(sf::Color(255, 255, 0));
+		break;
+	case 2:
+		this->clock.setFillColor(sf::Color(255, 255, 0));
+		break;
+	case 3:
+		this->clock.setFillColor(sf::Color(255, 255, 0));
+		break;
+	case 4:
+		this->clock.setFillColor(sf::Color(255, 165, 0));
+		break;
+	case 5:
+		this->clock.setFillColor(sf::Color(255, 165, 0));
+		break;
+	case 6:
+		this->clock.setFillColor(sf::Color(255, 165, 0));
+		break;
+	case 7:
+		this->clock.setFillColor(sf::Color(255, 140, 0));
+		break;
+	case 8:
+		this->clock.setFillColor(sf::Color(255, 140, 0));
+		break;
+	case 9:
+		this->clock.setFillColor(sf::Color(204, 112, 0));
+		break;
+	}
 
 	this->day.setString("Day " + std::to_string(this->days));
 
@@ -262,6 +311,7 @@ void GameState::update(const float& dt)
 	this->updateInput(dt);
 	this->updateKeytime(dt);
 
+
 	if (!this->paused)//unpaused
 	{
 		
@@ -273,23 +323,37 @@ void GameState::update(const float& dt)
 
 		this->player->update(dt);
 
+		//pauza nie dzia³a
+		if (this->getKeytime1())
+		{
+			this->eq->update(dt);
+			this->eq->updateUsing(dt,*this->player);
+		}
+		
+		this->eq->updatePicking(*this->window);
+		
+
 		this->updateStatus(dt);
 
 		this->timeCounter(dt);
-		if (this->time / 60 >= 3 && this->time / 60 <= 9)
+		if (this->time / 60 >= 9 )
 		{
-			tileMap->a = 8;
-			tileMap->b = 13;
+			tileMap->a = 3;
+			tileMap->b = 5;
+			this->clock.setFillColor(sf::Color(8, 37, 103));
 			//this->time = 0;
 		}
-		if (this->time / 60 >= 9)
+		if(static_cast<int>(this->time) / 60 == 12)
 		{
-			tileMap->a = 2;
-			tileMap->b = 3;
 			this->time = 0;
 			days++;
 		}
-		std::cout << this->time << std::endl;
+		if (this->time / 60 <= 9)
+		{
+			tileMap->a = 15;
+			tileMap->b = 20;	
+		}
+		//std::cout << this->time << std::endl;
 		
 		
 		
@@ -310,9 +374,15 @@ void GameState::render(sf::RenderTarget* target)
 		if (!target)
 			target = this->window;
 
+		target->setView(this->view);
+		this->tileMap->render(*target, this->player);
 
-		target->setView(this->window->getDefaultView()); //XD
+		this->player->render(*target);
 
+		this->tileMap->renderDeferred(*target);
+
+		target->setView(this->window->getDefaultView());//XD
+		this->eq->render(*target);
 		target->draw(clock);
 		target->draw(health);
 		target->draw(hunger);
@@ -323,12 +393,6 @@ void GameState::render(sf::RenderTarget* target)
 
 		target->setView(this->view);
 
-		this->tileMap->render(*target, this->player);
-
-		this->player->render(*target);
-
-		this->tileMap->renderDeferred(*target);
-
 		if (this->paused)//Pause menu
 		{
 			target->setView(this->window->getDefaultView());
@@ -337,7 +401,7 @@ void GameState::render(sf::RenderTarget* target)
 	}
 	else
 	{
-		std::cout << "You have lived for "+ std::to_string(days) + " day/s";
+		std::cout << "You have lived for "+ std::to_string(this->days) + " day/s";
 		target->setView(this->window->getDefaultView());
 		this->endState();
 	}

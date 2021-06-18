@@ -14,6 +14,7 @@ private:
 	sf::RectangleShape background;
 	int selectedItemIndex_;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
+	sf::Text result;
 
 	//Functions
 	void initVariables();

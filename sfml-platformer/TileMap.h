@@ -11,6 +11,17 @@
 class Tile;
 class Entity;
 
+enum Item {
+	MARCHEWKAX = 320,
+	MARCHEWKAY = 960,
+	ZIEMNIAKX = 288,
+	ZIEMNIAKY = 960,
+	PATYKX = 416,
+	PATYKY = 800,
+	KAMIENX = 864,
+	KAMIENY = 800
+};
+
 class TileMap
 {
 private:
@@ -25,6 +36,7 @@ private:
 	std::stack<Tile*> deferredRenderStack;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox;
+	std::vector<std::string> texture_x_y;
 	
 
 
@@ -51,7 +63,7 @@ public:
 
 	void updateCollision(Entity* entity, const float& dt);
 	void updateDamaging(Entity* entity);
-	void updatePicking(Entity* entity);
+	int updatePicking(Entity* entity);
 
 	void update();
 	void render(sf::RenderTarget& target, Entity* entity = NULL);
