@@ -118,6 +118,7 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 
 	this->temp_t = 0;
 	this->temp_t2 = 0;
+	this->temp_t3 = 0;
 	this->days = 1;
 
 	this->initPlayers();
@@ -336,22 +337,52 @@ void GameState::update(const float& dt)
 		this->updateStatus(dt);
 
 		this->timeCounter(dt);
-		if (this->time / 60 >= 9 )
-		{
-			tileMap->a = 3;
-			tileMap->b = 5;
-			this->clock.setFillColor(sf::Color(8, 37, 103));
-			//this->time = 0;
-		}
+		 
+		
+		//std::cout << temp_t3;
 		if(static_cast<int>(this->time) / 60 == 12)
 		{
 			this->time = 0;
 			days++;
+			this->temp_t3 = 0;
 		}
 		if (this->time / 60 <= 9)
 		{
-			tileMap->a = 15;
-			tileMap->b = 20;	
+			temp_t3 -= time / 60;
+			//temp = this->time / 2;
+			tileMap->a = 3 - temp_t3;
+			tileMap->b = 6 - temp_t3;
+			if (tileMap->a >= 17)
+			{
+				tileMap->a = 17;
+			}
+			if (tileMap->b >= 20)
+			{
+				tileMap->b = 20;
+			}
+		}
+		if (this->time / 60 >= 9.0001 && this->time / 60 <= 9.1)
+		{
+			this->temp_t3 = 0;
+		}
+		if (this->time / 60 >= 9)
+		{
+			temp_t3 -= time / 600;
+
+			
+			tileMap->a = 17 + temp_t3;
+			tileMap->b = 20 + temp_t3;
+			if (tileMap->a <= 3)
+			{
+				tileMap->a = 3;
+			}
+			if (tileMap->b <= 6)
+			{
+				tileMap->b = 6;
+			}
+			this->clock.setFillColor(sf::Color(8, 37, 103));
+			//this->tileMap->updateNight();
+			//this->time = 0;
 		}
 		//std::cout << this->time << std::endl;
 		

@@ -62,10 +62,10 @@ TileMap::TileMap(float gridSize, int width, int height, std::string texture_file
 	{
 		std::cout << "eror no tile";
 	}
-	this->collisionBox.setSize(sf::Vector2f(gridSize,gridSize));
-	this->collisionBox.setFillColor(sf::Color(255, 0, 0, 50));
-	this->collisionBox.setOutlineColor(sf::Color::Red);
-	this->collisionBox.setOutlineThickness(1.f);
+	//this->collisionBox.setSize(sf::Vector2f(gridSize,gridSize));
+	//this->collisionBox.setFillColor(sf::Color(255, 0, 0, 50));
+	//this->collisionBox.setOutlineColor(sf::Color::Red);
+	//this->collisionBox.setOutlineThickness(1.f);
 
 }
 
@@ -167,6 +167,23 @@ void TileMap::loadFromFile(const std::string file_name)
 
 	in_file.close();
 }
+
+//void TileMap::updateNight()
+//{
+//	for (int x = this->fromX; x < this->toX; x++)
+//	{
+//		for (int y = this->fromY; y < this->toY; y++)
+//		{
+//			for (int k = 0; k < map[x][y][this->layer].size(); k++)
+//			{
+//				
+//				this->map[x][y][this->layer][k]->getShape().setFillColor(sf::Color(255,255,255,50));
+//					
+//			}
+//
+//		}
+//	}
+//}
 
 void TileMap::updateCollision(Entity* entity, const float& dt)
 {

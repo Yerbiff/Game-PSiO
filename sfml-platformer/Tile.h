@@ -28,6 +28,7 @@ public:
 	const sf::Vector2f& getPosition()const;
 	const sf::FloatRect getGlobalBounds()const;
 	const sf::IntRect getTextureRect() const;
+	sf::RectangleShape getShape();
 
 	void deleteTile();
 	const bool intersects(const sf::FloatRect bounds)const;

@@ -1,7 +1,20 @@
-﻿  Inventory.cpp
+﻿  GameState.cpp
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(52,48): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(52,34): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(53,43): warning C4305: "argument": obcięcie z "double" do "T"
+          with
+          [
+              T=float
+          ]
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(198,16): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(292,18): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(353,19): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(354,19): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(373,20): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(374,20): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
   Trwa generowanie kodu
-  2 of 1219 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  1 of 1219 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    21 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu
   sfml-platformer.vcxproj -> C:\Users\Jarek\Documents\Game-PSiO\Release\sfml-platformer.exe

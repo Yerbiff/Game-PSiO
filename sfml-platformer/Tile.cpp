@@ -52,6 +52,11 @@ const sf::IntRect Tile::getTextureRect() const
 	return this->shape.getTextureRect();
 }
 
+sf::RectangleShape Tile::getShape()
+{
+	return this->shape;
+}
+
 void Tile::deleteTile()
 {
 	this->shape.move(10000000,1000000000);

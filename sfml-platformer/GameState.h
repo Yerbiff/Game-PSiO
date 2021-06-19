@@ -32,6 +32,7 @@ private:
 
 	int temp_t;
 	int temp_t2;
+	float temp_t3;
 	int days;
 
 	sf::Font font;

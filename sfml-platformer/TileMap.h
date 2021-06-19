@@ -61,6 +61,7 @@ public:
 
 	void loadFromFile(const std::string file_name);
 
+	//void updateNight();
 	void updateCollision(Entity* entity, const float& dt);
 	void updateDamaging(Entity* entity);
 	int updatePicking(Entity* entity);
