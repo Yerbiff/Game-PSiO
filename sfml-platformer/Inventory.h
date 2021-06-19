@@ -24,17 +24,15 @@ private:
 
 	void initTextures();
 	void initSprites();
+	void initBar(sf::RenderWindow& window);
+	void initAmount(sf::RenderWindow& window);
+	void initItems(sf::RenderWindow& window);
 
 public:
 	Inventory(sf::RenderWindow& window, sf::Font& font);//add player later to load items
 	virtual ~Inventory();
 
-	bool open_;
-
 	void addItem(int id);
-	void use(int key,int id_i, int id_eq);
-	void open();
-	void close();
 	void moveLeft();
 	void moveRight();
 

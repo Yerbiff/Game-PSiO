@@ -7,8 +7,6 @@ enum TileTypes {
 	PICKABLE
 };
 
-
-
 class Tile
 {
 private:

@@ -1,15 +1,14 @@
 #include "stdafx.h"
 #include "PauseMenu.h"
 
-PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& font) 
-	: font(font)
+void PauseMenu::initPasueMenu(sf::RenderWindow& window)
 {
 	this->backgroud.setSize(sf::Vector2f(static_cast<float>(window.getSize().x), static_cast<float>(window.getSize().y)));
 	this->backgroud.setFillColor(sf::Color(20, 20, 20, 100));
 
 	this->container.setSize(sf::Vector2f(static_cast<float>(window.getSize().x) / 4.f, static_cast<float>(window.getSize().y) - 100.f));
 	this->container.setFillColor(sf::Color(20, 20, 20, 200));
-	this->container.setPosition(static_cast<float>(window.getSize().x) /2.f - this->container.getSize().x / 2.f, 30.f);
+	this->container.setPosition(static_cast<float>(window.getSize().x) / 2.f - this->container.getSize().x / 2.f, 30.f);
 
 
 	this->pauseText.setFont(font);
@@ -31,6 +30,13 @@ PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& font)
 	this->menu[1].setCharacterSize(40);
 	this->menu[1].setPosition(this->container.getPosition().x + this->container.getSize().x / 2.f - this->pauseText.getGlobalBounds().width / 2.f, window.getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2);
 
+}
+
+PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& font)
+	: font(font)
+{
+	initPasueMenu(window);
+	
 	selectedItemIndex_ = 0;
 }
 

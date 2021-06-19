@@ -10,14 +10,11 @@ void Inventory::initTextures()
 	for (int i = 1; i < MAX_NUMBER_OF_TEXTURES; i++)
 	{
 		if (!this->items_textures[i].loadFromFile("Resources/Images/Sprites/Items/"+std::to_string(i)+".png"))
-		//if (!this->items_textures[i].loadFromFile("Resources/Images/Sprites/Items/0.png"))
 		{
 			throw("Item texture could not load");
 		}
 		
 	}
-	//this->items_textures[2].loadFromFile("Resources/Images/Sprites/Items/1.png");
-	//this->items_textures[19].loadFromFile("Resources/Images/Sprites/Items/2.png");
 }
 void Inventory::initSprites()
 {
@@ -28,58 +25,26 @@ void Inventory::initSprites()
 	}
 }
 
-Inventory::Inventory(sf::RenderWindow& window, sf::Font& font) 
-	: font(font)
+void Inventory::initBar(sf::RenderWindow& window)
 {
-	initTextures();
-	initSprites();
-
-	for (int i = 0; i < MAX_NUMBER_OF_ITEM; i++)
-	{
-		this->items_eq[i] = 0;
-		this->items[i] = items_sprites[items_eq[i]];
-	}
-
 	this->bar.setFillColor(sf::Color(139, 69, 19));
-	this->bar.setSize(sf::Vector2f(1300,100));
+	this->bar.setSize(sf::Vector2f(1300, 100));
 	this->bar.setPosition(sf::Vector2f(window.getSize().x / 5.f, window.getSize().y - 150.f));
 
 	for (int i = 0; i < MAX_NUMBER_OF_ITEM; i++)
 	{
-		//this->items_sprites[i].setPosition(sf::Vector2f(50 *(i+1), window.getSize().y - 150.f));
 		this->eq_square[i].setFillColor(sf::Color(222, 184, 135));
-		this->eq_square[i].setSize(sf::Vector2f(100.f,80.f));
-		this->eq_square[i].setPosition(((window.getSize().x / 15.f)* i)+400.f, window.getSize().y - 140.f);
+		this->eq_square[i].setSize(sf::Vector2f(100.f, 80.f));
+		this->eq_square[i].setPosition(((window.getSize().x / 15.f) * i) + 400.f, window.getSize().y - 140.f);
 	}
-	this->items_sprites[5].setPosition(((window.getSize().x / 15.f) * 9) + 400.f, window.getSize().y - 140.f);
-	this->items_sprites[5].setScale(2.5, 2.5);
+
+	//item in hand square
+	eq_square[MAX_NUMBER_OF_ITEM - 1].setFillColor(sf::Color(205, 133, 63));
+}
+
+void Inventory::initAmount(sf::RenderWindow& window)
+{
 	for (int i = 0; i < MAX_NUMBER_OF_ITEM - 1; i++)
-	{
-		switch (this->items_eq[i])
-		{
-		case 1:
-			this->items_sprites[1].setPosition(((window.getSize().x / 15.f) * i) + 400.f, window.getSize().y - 140.f);
-			this->items_sprites[1].setScale(2.5, 2.5);
-			break;
-		case 2:
-			this->items_sprites[2].setPosition(((window.getSize().x / 15.f) * i) + 400.f, window.getSize().y - 140.f);
-			this->items_sprites[2].setScale(2.5, 2.5);
-			break;
-		case 3:
-			this->items_sprites[3].setPosition(((window.getSize().x / 15.f) * i) + 400.f, window.getSize().y - 140.f);
-			this->items_sprites[3].setScale(2.5, 2.5);
-			break;
-		case 4:
-			this->items_sprites[4].setPosition(((window.getSize().x / 15.f) * i) + 400.f, window.getSize().y - 140.f);
-			this->items_sprites[4].setScale(2.5, 2.5);
-			break;
-		case 5:
-			this->items_sprites[5].setPosition(((window.getSize().x / 15.f) * i) + 400.f, window.getSize().y - 140.f);
-			this->items_sprites[5].setScale(2.5, 2.5);
-			break;
-		}
-	}
-	for (int i = 0; i < MAX_NUMBER_OF_ITEM-1; i++)
 	{
 		this->amount[i].setFont(font);
 		this->amount_value.push_back(0);
@@ -88,8 +53,32 @@ Inventory::Inventory(sf::RenderWindow& window, sf::Font& font)
 		this->amount[i].setFillColor(sf::Color::Black);
 		this->amount[i].setString(std::to_string(amount_value[i]));
 	}
+}
 
-	eq_square[MAX_NUMBER_OF_ITEM-1].setFillColor(sf::Color(205, 133, 63));
+void Inventory::initItems(sf::RenderWindow& window)
+{
+	//inicialization of items standard all 0's
+	for (int i = 0; i < MAX_NUMBER_OF_ITEM; i++)
+	{
+		this->items_eq[i] = 0;
+		this->items[i] = items_sprites[items_eq[i]];
+	}
+
+	//inicialization of the sword
+	this->items_sprites[5].setPosition(((window.getSize().x / 15.f) * 9) + 400.f, window.getSize().y - 140.f);
+	this->items_sprites[5].setScale(2.5, 2.5);
+
+}
+
+Inventory::Inventory(sf::RenderWindow& window, sf::Font& font) 
+	: font(font)
+{
+	initTextures();
+	initSprites();
+	initBar(window);
+	initItems(window);
+	initAmount(window);
+	
 	this->selectedItemIndex_ = 0;
 }
 
@@ -99,11 +88,12 @@ Inventory::~Inventory()
 
 void Inventory::addItem(int id)
 {
+	//Ading item to eq if picking item is not 0
 	if (id != 0)
 	{
 		for (int i = 0; i < MAX_NUMBER_OF_ITEM; i++)
 		{
-
+			//add new item
 			if (amount_value[i] == 0)
 			{
 				amount_value[i] += 1;
@@ -111,42 +101,16 @@ void Inventory::addItem(int id)
 				this->items_eq[i] = id;
 				break;
 			}
+			//add another item if exist
 			else if (amount_value[i] != 0 && this->items_eq[i] == id)
 			{
 				amount_value[i] += 1;
 				this->amount[i].setString(std::to_string(amount_value[i]));
 				break;
-				//this->items_eq[i] = id;
 			}
 		}
 	}
 }
-
-void Inventory::use(int Key,int id_i , int id_eq)
-{
-	switch (Key)
-	{
-	case 19:
-		std::cout << "throw out of eq";
-		break;
-	case 20:
-		std::cout << "Use";
-		break;
-	default:
-		break;
-	}
-	//this->items[id_eq] = 0;
-
-}
-void Inventory::open()
-{
-	this->open_ = true;
-}
-void Inventory::close()
-{
-	this->open_ = false;
-}
-
 void Inventory::moveLeft()
 {
 	if (selectedItemIndex_ - 1 >= 0)
@@ -173,6 +137,7 @@ int Inventory::GetPressedItem()
 }
 void Inventory::updatePicking(sf::RenderWindow& window)
 {
+	//if item is in eq put picture in eq
 	for (int i = 0; i < MAX_NUMBER_OF_ITEM - 1; i++)
 	{
 		this->items[i] = items_sprites[items_eq[i]];
@@ -204,6 +169,7 @@ void Inventory::updatePicking(sf::RenderWindow& window)
 }
 void Inventory::updateUsing(const float dt, Entity& entity)
 {
+	//update using item "eating"
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
 	{
 		switch (this->GetPressedItem())
@@ -214,7 +180,6 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				this->amount_value[0] = 0;
 
 			this->amount[0].setString(std::to_string(amount_value[0]));
-			//this->items_eq[0];
 			break;
 		case 1:
 			this->amount_value[1] -= 1;
@@ -222,7 +187,6 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				this->amount_value[1] = 0;
 
 			this->amount[1].setString(std::to_string(amount_value[1]));
-			//this->items_eq[0];
 			break;
 		case 2:
 			this->amount_value[2] -= 1;
@@ -230,7 +194,6 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				this->amount_value[2] = 0;
 
 			this->amount[2].setString(std::to_string(amount_value[2]));
-			//this->items_eq[0];
 			break;
 		case 3:
 			this->amount_value[3] -= 1;
@@ -238,11 +201,10 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				this->amount_value[3] = 0;
 
 			this->amount[3].setString(std::to_string(amount_value[3]));
-			//this->items_eq[0];
 			break;
 
 		}
-		
+		//has to be changed
 		entity.hp += 10;
 		entity.hunger += 10;
 		if (entity.hp >= 100)
@@ -267,28 +229,28 @@ void Inventory::update(const float& dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 		this->moveRight();
 	
-
 }
 
 void Inventory::render(sf::RenderTarget& target)
-{
+{	//drawing bar
 	target.draw(this->bar);
+
+	//drawing eq squares
 	for(auto& i : eq_square)
 		target.draw(i);
+
+	//drawing if this item is in eq
 	for (int i = 0; i < MAX_NUMBER_OF_ITEM; i++)
 	{
 		if (this->amount_value[i] != 0)
 		{
 			target.draw(items[i]);
-			/*for (auto& i : items_sprites)
-			{
-				target.draw(i);
-			}*/
-			//target.draw(items_sprites[i+1]);
 		}
 	}
+	//drawing sword in hand
 	target.draw(items_sprites[5]);
 
+	//drawing amount of the items in eq
 	for (auto& i : amount)
 	{
 		target.draw(i);

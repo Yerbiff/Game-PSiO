@@ -27,6 +27,7 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->animationComponent->addAnimation("WALK", 8.f, 0, 1 , 7, 1 , 32, 32);
 	this->animationComponent->addAnimation("ATTACK", 5.f, 0, 4, 8, 4, 32, 31);
 	this->animationComponent->addAnimation("PICK", 10.f, 0, 7, 4, 7, 32, 32);
+	this->animationComponent->addAnimation("DYING", 10.f, 0, 7, 7, 7, 32, 32);
 }
 
 Player::~Player()
@@ -51,46 +52,55 @@ void Player::updatePick()
 
 void Player::updateAnimation(const float& dt)
 {
-	if (this->atacking)
+	if ((this->hp != 0))
 	{
-		if (this->animationComponent->play("ATTACK", dt, true))
-			this->atacking = false;
-	}
-	if (this->movmentComponent->getState(IDLE))
-	{
-		this->animationComponent->play("IDLE", dt);
-	}
-	if (this->picking)
-	{
-		if (this->animationComponent->play("PICK", dt, true))
-			this->picking = false;
-	}
+		if (this->atacking)
+		{
+			if (this->animationComponent->play("ATTACK", dt, true))
+				this->atacking = false;
+		}
 
-	else if (this->movmentComponent->getState(MOVING_RIGHT))
-	{
-		if (this->sprite.getScale().x < 0.f)
+		if (this->movmentComponent->getState(IDLE))
 		{
-			this->sprite.setOrigin(0.f, 0.f);
-			this->sprite.setScale(1.8, 1.8);
+			this->animationComponent->play("IDLE", dt);
 		}
-		this->animationComponent->play("WALK", dt);
-	}
-	else if (this->movmentComponent->getState(MOVING_LEFT))
-	{
-		if (this->sprite.getScale().x > 0.f)
+
+		if (this->picking)
 		{
-			this->sprite.setOrigin(29.f, 0.f);
-			this->sprite.setScale(-1.8, 1.8);
+			if (this->animationComponent->play("PICK", dt, true))
+				this->picking = false;
 		}
-		this->animationComponent->play("WALK", dt);
+
+		else if (this->movmentComponent->getState(MOVING_RIGHT))
+		{
+			if (this->sprite.getScale().x < 0.f)
+			{
+				this->sprite.setOrigin(0.f, 0.f);
+				this->sprite.setScale(1.8, 1.8);
+			}
+			this->animationComponent->play("WALK", dt);
+		}
+		else if (this->movmentComponent->getState(MOVING_LEFT))
+		{
+			if (this->sprite.getScale().x > 0.f)
+			{
+				this->sprite.setOrigin(29.f, 0.f);
+				this->sprite.setScale(-1.8, 1.8);
+			}
+			this->animationComponent->play("WALK", dt);
+		}
+		else if (this->movmentComponent->getState(MOVING_UP))
+		{
+			this->animationComponent->play("WALK", dt);
+		}
+		else if (this->movmentComponent->getState(MOVING_DOWN))
+		{
+			this->animationComponent->play("WALK", dt);
+		}
 	}
-	else if (this->movmentComponent->getState(MOVING_UP))
+	else 
 	{
-		this->animationComponent->play("WALK", dt);
-	}
-	else if (this->movmentComponent->getState(MOVING_DOWN))
-	{
-		this->animationComponent->play("WALK", dt);
+		this->animationComponent->play("DYING", dt, true);
 	}
 }
 

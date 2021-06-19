@@ -151,13 +151,9 @@ void TileMap::loadFromFile(const std::string file_name)
 		}
 
 		//Load all tiles
-		//int j = 0;
 		while (in_file >> x >> y >> z >> trX >> trY >> collison >> type)
 		{
-			//this->texture_x_y[j] = std::to_string(trX);
 			this->map[x][y][z].push_back(new Tile(x, y, this->gridSizeF, this->tileSheet, sf::IntRect(trX, trY, this->gridSizeI, this->gridSizeI), collison, type));
-			
-			//j++;
 		}
 	}
 	else
@@ -167,23 +163,6 @@ void TileMap::loadFromFile(const std::string file_name)
 
 	in_file.close();
 }
-
-//void TileMap::updateNight()
-//{
-//	for (int x = this->fromX; x < this->toX; x++)
-//	{
-//		for (int y = this->fromY; y < this->toY; y++)
-//		{
-//			for (int k = 0; k < map[x][y][this->layer].size(); k++)
-//			{
-//				
-//				this->map[x][y][this->layer][k]->getShape().setFillColor(sf::Color(255,255,255,50));
-//					
-//			}
-//
-//		}
-//	}
-//}
 
 void TileMap::updateCollision(Entity* entity, const float& dt)
 {
@@ -311,7 +290,6 @@ void TileMap::updateDamaging(Entity* entity)
 				sf::FloatRect wallBounds;
 				if(this->map[x][y][this->layer][k]->getType() == TileTypes::DAMAGING)
 					wallBounds = this->map[x][y][this->layer][k]->getGlobalBounds();
-				//sf::FloatRect nextPositionBounds = entity->getNextPositionBounds(dt);
 
 				if (playerBounds.intersects(wallBounds))
 				{
@@ -334,12 +312,14 @@ int TileMap::updatePicking(Entity* entity)
 				sf::FloatRect wallBounds;
 				if (this->map[x][y][this->layer][k]->getType() == TileTypes::PICKABLE)
 					wallBounds = this->map[x][y][this->layer][k]->getGlobalBounds();
-				//sf::FloatRect nextPositionBounds = entity->getNextPositionBounds(dt);
 
 				if (playerBounds.intersects(wallBounds) && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
 				{
 				
+					//Deleting tile from map xD
 					this->map[x][y][this->layer][k]->deleteTile();
+
+					//CHecking picked item and return value
 					switch (this->map[x][y][this->layer][k]->getTextureRect().left)
 					{
 					case MARCHEWKAX:
@@ -380,10 +360,9 @@ int TileMap::updatePicking(Entity* entity)
 	return 0;
 }
 
-
-
 void TileMap::render(sf::RenderTarget& target, Entity* entity)
 {
+	//rendering map only near the hero
 	if (entity)
 	{
 		this->layer = 0;
@@ -422,12 +401,10 @@ void TileMap::render(sf::RenderTarget& target, Entity* entity)
 					if (this->map[x][y][this->layer][k]->getType() == TileTypes::DOODAD)
 					{
 						this->deferredRenderStack.push(this->map[x][y][this->layer][k]);
-						//this->damaging = false;
 					}
 					else
 					{
 						this->map[x][y][this->layer][k]->render(target);
-						//this->damaging = false;
 					}
 					if (map[x][y][this->layer][k]->getCollision())
 					{

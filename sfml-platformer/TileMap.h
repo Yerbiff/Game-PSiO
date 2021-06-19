@@ -25,7 +25,6 @@ enum Item {
 class TileMap
 {
 private:
-	void clear();
 	float gridSizeF;
 	int gridSizeI;
 	int layers;
@@ -36,10 +35,9 @@ private:
 	std::stack<Tile*> deferredRenderStack;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox;
-	std::vector<std::string> texture_x_y;
 	
-
-
+	//Functions
+	void clear();
 
 	//Culling
 	int fromX;
@@ -55,13 +53,13 @@ public:
 	TileMap(float gridSize, int width, int height, std::string texture_file);
 	virtual ~TileMap();
 
+	//Accesors
 	const sf::Texture* getTileSheet() const;
 	const int getLayerSize(const int x, const int y, const int z) const;
 
-
+	//Functions
 	void loadFromFile(const std::string file_name);
 
-	//void updateNight();
 	void updateCollision(Entity* entity, const float& dt);
 	void updateDamaging(Entity* entity);
 	int updatePicking(Entity* entity);

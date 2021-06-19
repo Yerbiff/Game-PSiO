@@ -13,9 +13,8 @@ private:
 	sf::RectangleShape background;
 	int selectedItemIndex_;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
-	//std::map<std::string, Button*> buttons;
 
-
+	void initPasueMenu(sf::RenderWindow& window);
 public:
 	PauseMenu(sf::RenderWindow& window, sf::Font& font);
 	virtual ~PauseMenu();
