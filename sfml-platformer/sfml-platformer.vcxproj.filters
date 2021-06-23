@@ -78,6 +78,9 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DeathMenu.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -126,6 +129,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathMenu.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>

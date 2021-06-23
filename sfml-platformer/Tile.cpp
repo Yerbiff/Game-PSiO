@@ -16,7 +16,6 @@ Tile::Tile(int grid_x, int grid_y, float gridSizeF, const sf::Texture& texture, 
 	this->shape.setPosition(static_cast<float>(grid_x) * gridSizeF, static_cast<float>(grid_y) * gridSizeF);
 	this->shape.setTexture(&texture);
 	this->shape.setTextureRect(texture_rect);
-	
 
 	this->collision = collison;
 	this->type = type;
@@ -55,6 +54,7 @@ const sf::IntRect Tile::getTextureRect() const
 sf::RectangleShape Tile::getShape()
 {
 	return this->shape;
+	
 }
 
 void Tile::deleteTile()

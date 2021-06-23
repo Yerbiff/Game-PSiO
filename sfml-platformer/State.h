@@ -18,6 +18,7 @@ protected:
 	std::map<std::string, int> keybinds;
 	bool quit;
 	bool paused;
+	bool death;
 	float keytime;
 	float keytime1;
 	float keytimeMax;
@@ -43,6 +44,8 @@ public:
 	void endState();
 	void pauseState();
 	void unpauseState();
+	void DeathState();
+
 
 	virtual void timeCounter(const float& dt);
 	virtual void updateKeytime(const float& dt);

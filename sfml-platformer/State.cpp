@@ -7,6 +7,7 @@ State::State(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys
 	this->supportedKeys = supportedKeys;
 	this->states = states;
 	this->quit = false;
+	this->death = false;
 	this->paused = false;
 	this->keytime = 0.f;
 	this->keytime1 = 0.f;
@@ -57,6 +58,11 @@ void State::pauseState()
 void State::unpauseState()
 {
 	this->paused = false;
+}
+
+void State::DeathState()
+{
+	this->death = true;
 }
 
 void State::timeCounter(const float& dt)

@@ -50,6 +50,11 @@ void GameState::initPauseMenu()
 	this->pmenu = new PauseMenu(*this->window, this->font);
 }
 
+void GameState::initDeathMenu()
+{
+	this->dmenu = new DeathMenu(*this->window, this->font);
+}
+
 void GameState::initPlayers()
 {
 	this->player = new Player(rand()% 999, rand() % 999, this->textures["PLAYER_SHEET"]);
@@ -111,7 +116,7 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	this->initFonts();
 	this->initTextures();
 	this->initPauseMenu();
-
+	this->initDeathMenu();
 
 	this->temp_t = 0;
 	this->temp_t2 = 0;
@@ -123,17 +128,19 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	this->initEq();
 	this->initStatus();
 
-
 }
+
 
 
 
 GameState::~GameState()
 {
 	delete this->pmenu;
+	delete this->dmenu;
 	delete this->player;
 	delete this->tileMap;
 	delete this->eq;
+	
 }
 
 void GameState::updateView(const float& dt)
@@ -169,13 +176,18 @@ void GameState::updatePlayerInput(const float& dt)
 		this->player->move(0.f, -1.f, dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
 		this->player->move(0.f, 1.f, dt);
-
+	if (this->player->hp == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
+	{
+		this->endState();
+	}
+			
 }
 
 void GameState::updatePausedItems()
 {
 	if (this->pmenu->isItemPressed(1))
 	{
+
 		this->endState();
 	}
 	else if (this->pmenu->isItemPressed(0))
@@ -197,7 +209,7 @@ void GameState::updateTileMap(const float& dt)
 		this->tileMap->updateDamaging(this->player);
 		temp_t = 0;
 	}
-	//if X is clikked and hasnt been clicked in some time pick item from the ground
+	//if X is clicked and hasnt been clicked in some time pick item from the ground
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X) && this->getKeytime())
 	{
 		this->eq->addItem(this->tileMap->updatePicking(this->player));
@@ -245,7 +257,7 @@ void GameState::updateStatus(const float& dt)
 		this->health.setFillColor(sf::Color(255, 0, 0, 255));
 		break;
 	}
-	switch (static_cast<int>((this->time/60)))
+	switch (static_cast<int>((this->time/4)))
 	{
 	case 0:
 		this->clock.setFillColor(sf::Color(255, 255, 0));
@@ -297,13 +309,58 @@ void GameState::updateStatus(const float& dt)
 	}
 	else
 	{
-		if (this->time2 / 60 >= 2)
+		if (this->time2 / 4 >= 2)
 		{
 			this->player->hunger -= 10;
 			this->time2 = 0;
 		}
 	}
 	this->hunger_lv.setString(std::to_string(this->player->hunger));
+}
+void GameState::updateDay_Night()
+{
+	//updating day and night
+	if (static_cast<int>(this->time) / 4 == 12)
+	{
+		this->time = 0;
+		days++;
+		this->temp_t3 = 0;
+	}
+	if (this->time / 4 <= 9)
+	{
+		temp_t3 -= time / 60;
+		tileMap->a = 3 - temp_t3;
+		tileMap->b = 6 - temp_t3;
+		if (tileMap->a >= 17)
+		{
+			tileMap->a = 17;
+		}
+		if (tileMap->b >= 20)
+		{
+			tileMap->b = 20;
+		}
+	}
+	if (this->time / 4 >= 9.0001 && this->time / 4 <= 9.1)
+	{
+		this->temp_t3 = 0;
+	}
+	if (this->time / 4 >= 9)
+	{
+		temp_t3 -= time / 600;
+
+
+		tileMap->a = 17 + temp_t3;
+		tileMap->b = 20 + temp_t3;
+		if (tileMap->a <= 3)
+		{
+			tileMap->a = 3;
+		}
+		if (tileMap->b <= 6)
+		{
+			tileMap->b = 6;
+		}
+		this->clock.setFillColor(sf::Color(8, 37, 103));;
+	}
 }
 
 void GameState::update(const float& dt)
@@ -331,57 +388,12 @@ void GameState::update(const float& dt)
 		
 		this->eq->updatePicking(*this->window);
 		
-
 		this->updateStatus(dt);
 
 		this->timeCounter(dt);
 		 
+		this->updateDay_Night();
 		
-		//std::cout << temp_t3;
-
-		//updating day and night
-		if(static_cast<int>(this->time) / 60 == 12)
-		{
-			this->time = 0;
-			days++;
-			this->temp_t3 = 0;
-		}
-		if (this->time / 60 <= 9)
-		{
-			temp_t3 -= time / 60;
-			tileMap->a = 3 - temp_t3;
-			tileMap->b = 6 - temp_t3;
-			if (tileMap->a >= 17)
-			{
-				tileMap->a = 17;
-			}
-			if (tileMap->b >= 20)
-			{
-				tileMap->b = 20;
-			}
-		}
-		if (this->time / 60 >= 9.0001 && this->time / 60 <= 9.1)
-		{
-			this->temp_t3 = 0;
-		}
-		if (this->time / 60 >= 9)
-		{
-			temp_t3 -= time / 600;
-
-			
-			tileMap->a = 17 + temp_t3;
-			tileMap->b = 20 + temp_t3;
-			if (tileMap->a <= 3)
-			{
-				tileMap->a = 3;
-			}
-			if (tileMap->b <= 6)
-			{
-				tileMap->b = 6;
-			}
-			this->clock.setFillColor(sf::Color(8, 37, 103));;
-		}
-		//std::cout << this->time << std::endl;	
 	}
 	else 
 	{
@@ -391,6 +403,7 @@ void GameState::update(const float& dt)
 	}
 
 }
+
 
 void GameState::render(sf::RenderTarget* target)
 {
@@ -427,13 +440,15 @@ void GameState::render(sf::RenderTarget* target)
 			target->setView(this->window->getDefaultView());
 			this->pmenu->render(*target);
 		}
+		
 	}
 	else
 	{
 		//if you died 
-		std::cout << "You have lived for "+ std::to_string(this->days) + " day/s";
+		this->dmenu->setDays(this->days);
 		target->setView(this->window->getDefaultView());
-		this->endState();
+		this->dmenu->render(*target);
+		
 	}
 
 }

@@ -15,6 +15,7 @@ void Inventory::initTextures()
 		}
 		
 	}
+
 }
 void Inventory::initSprites()
 {
@@ -167,6 +168,16 @@ void Inventory::updatePicking(sf::RenderWindow& window)
 		}
 	}
 }
+
+bool Inventory::checkEatable(int id)
+{
+	if (id == 3 || id == 4)
+	{
+		return true;
+	}
+	return false;
+}
+
 void Inventory::updateUsing(const float dt, Entity& entity)
 {
 	//update using item "eating"
@@ -175,38 +186,58 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 		switch (this->GetPressedItem())
 		{
 		case 0:
-			this->amount_value[0] -= 1;
-			if (this->amount_value[0] <= 0)
-				this->amount_value[0] = 0;
-
-			this->amount[0].setString(std::to_string(amount_value[0]));
+			if (checkEatable(items_eq[0]))
+			{
+				this->amount_value[0] -= 1;
+				if (this->amount_value[0] <= 0)
+					this->amount_value[0] = 0;
+				entity.hp += 10;
+				entity.hunger += 10;
+			
+				this->amount[0].setString(std::to_string(amount_value[0]));
+			}
 			break;
 		case 1:
-			this->amount_value[1] -= 1;
-			if (this->amount_value[1] <= 0)
-				this->amount_value[1] = 0;
+			if (checkEatable(items_eq[1]))
+			{
+				this->amount_value[1] -= 1;
+				if (this->amount_value[1] <= 0)
+					this->amount_value[1] = 0;
+				entity.hp += 10;
+				entity.hunger += 10;
 
-			this->amount[1].setString(std::to_string(amount_value[1]));
+				this->amount[1].setString(std::to_string(amount_value[1]));
+			}
 			break;
 		case 2:
-			this->amount_value[2] -= 1;
-			if (this->amount_value[2] <= 0)
-				this->amount_value[2] = 0;
-
-			this->amount[2].setString(std::to_string(amount_value[2]));
+			if (checkEatable(items_eq[2]))
+			{
+				this->amount_value[2] -= 1;
+				if (this->amount_value[2] <= 0)
+					this->amount_value[2] = 0;
+			
+				entity.hp += 10;
+				entity.hunger += 10;
+				this->amount[2].setString(std::to_string(amount_value[2]));
+			}
+			
 			break;
 		case 3:
-			this->amount_value[3] -= 1;
-			if (this->amount_value[3] <= 0)
-				this->amount_value[3] = 0;
-
-			this->amount[3].setString(std::to_string(amount_value[3]));
+			if (checkEatable(items_eq[3]))
+			{
+				this->amount_value[3] -= 1;
+				if (this->amount_value[3] <= 0)
+					this->amount_value[3] = 0;
+			
+				entity.hp += 10;
+				entity.hunger += 10;
+				this->amount[3].setString(std::to_string(amount_value[3]));
+			}
+			
 			break;
 
 		}
 		//has to be changed
-		entity.hp += 10;
-		entity.hunger += 10;
 		if (entity.hp >= 100)
 			entity.hp = 100;
 		if (entity.hunger >= 100)

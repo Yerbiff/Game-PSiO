@@ -73,12 +73,13 @@ Game::Game() {
 
 Game::~Game() {
 	//delete this->menu;
-	delete this->window;
+	
 	while (this->states.empty())
 	{
 		delete this->states.top();
 		this->states.pop();
 	}
+	delete this->window;
 }
 
 //Functions

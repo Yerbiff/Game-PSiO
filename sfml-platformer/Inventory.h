@@ -40,6 +40,7 @@ public:
 
 	void updatePicking(sf::RenderWindow& window);
 	void updateUsing(const float dt, Entity& entity);
+	bool checkEatable(int id);
 
 	void update(const float& dt);
 	void render(sf::RenderTarget& target);

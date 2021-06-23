@@ -5,6 +5,7 @@
 #include "PauseMenu.h"
 #include "TileMap.h"
 #include "Inventory.h"
+#include "DeathMenu.h"
 
 class PauseMenu;
 class Player;
@@ -39,6 +40,7 @@ private:
 	PauseMenu* pmenu;
 	Player* player;
 	Inventory* eq;
+	DeathMenu* dmenu;
 
 	TileMap* tileMap;
 	//sf::Texture texture;
@@ -53,6 +55,7 @@ private:
 	void initPauseMenu();
 	void initPlayers();
 	void initTileMap();
+	void initDeathMenu();
 public:
 	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~GameState();
@@ -63,6 +66,8 @@ public:
 	void updatePausedItems();
 	void updateTileMap(const float& dt);
 	void updateStatus(const float& dt);
+	void updateDay_Night();
+
 	void update(const float& dt);
 	void render(sf::RenderTarget* target = nullptr);
 };
