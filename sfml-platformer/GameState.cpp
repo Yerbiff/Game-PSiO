@@ -150,7 +150,7 @@ void GameState::updateView(const float& dt)
 
 void GameState::updateInput(const float& dt)
 {
-	//update if pasue manue hase to be on the screen
+	//update if pasue manue 
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("CLOSE"))) && this->getKeytime())
 	{
