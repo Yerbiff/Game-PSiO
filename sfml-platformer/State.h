@@ -35,17 +35,16 @@ public:
 	State(sf::RenderWindow* window,std::map<std::string,int>* supportedKeys, std::stack<State*>* states);
 	virtual ~State();
 
+	//Getters
 	const bool& getQuit() const;
 	const bool getKeytime();
 	const bool getKeytime1();
-	//virtual void endStateUpdate() = 0;
 
 	//Functions
-	void endState();
-	void pauseState();
-	void unpauseState();
-	void DeathState();
-
+	virtual void endState();
+	virtual void pauseState();
+	virtual void unpauseState();
+	virtual void DeathState();
 
 	virtual void timeCounter(const float& dt);
 	virtual void updateKeytime(const float& dt);

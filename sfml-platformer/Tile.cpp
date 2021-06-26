@@ -51,7 +51,7 @@ const sf::IntRect Tile::getTextureRect() const
 	return this->shape.getTextureRect();
 }
 
-sf::RectangleShape Tile::getShape()
+const sf::RectangleShape Tile::getShape() const
 {
 	return this->shape;
 	

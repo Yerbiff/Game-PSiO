@@ -1,19 +1,31 @@
-﻿  GameState.cpp
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(60,48): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(60,34): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(61,43): warning C4305: "argument": obcięcie z "double" do "T"
+﻿  Game.cpp
+  GameState.cpp
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(61,48): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(61,34): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(62,43): warning C4305: "argument": obcięcie z "double" do "T"
           with
           [
               T=float
           ]
 C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(206,16): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(303,18): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(332,18): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(333,18): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(352,19): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
-C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(353,19): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(304,18): warning C4244: "=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(334,19): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(335,19): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(354,20): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\GameState.cpp(355,20): warning C4244: "argument": konwersja z "float" do "int", możliwa utrata danych
+  main.cpp
+  MainMenuState.cpp
+  TileMap.cpp
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(16,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(85,18): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(87,19): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(89,28): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(247,21): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(308,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(331,22): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+C:\Users\Jarek\Documents\Game-PSiO\sfml-platformer\TileMap.cpp(421,23): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   Trwa generowanie kodu
-  0 of 1228 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 1237 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Zakończono generowanie kodu

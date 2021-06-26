@@ -35,6 +35,10 @@ private:
 	std::stack<Tile*> deferredRenderStack;
 	sf::Texture tileSheet;
 	sf::RectangleShape collisionBox;
+
+	int a;
+	int b;
+	bool damaging;
 	
 	//Functions
 	void clear();
@@ -46,20 +50,22 @@ private:
 	int toY;
 	int layer;
 public:
-	int a;
-	int b;
-	bool damaging;
 
 	TileMap(float gridSize, int width, int height, std::string texture_file);
 	virtual ~TileMap();
 
-	//Accesors
+	//Getters
 	const sf::Texture* getTileSheet() const;
 	const int getLayerSize(const int x, const int y, const int z) const;
+	const int getA() const;
+	const int getB() const;
+
+	//Setters
+	virtual void setA(int a);
+	virtual void setB(int b);
 
 	//Functions
 	void loadFromFile(const std::string file_name);
-
 	void updateCollision(Entity* entity, const float& dt);
 	void updateDamaging(Entity* entity);
 	int updatePicking(Entity* entity);

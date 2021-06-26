@@ -4,6 +4,7 @@
 #include <fstream>
 #include <conio.h>
 #include <string>
+
 void TileMap::clear()
 {
 	for (int x = 0; x < this->maxSizeWorldGrid.x; x++)
@@ -164,6 +165,26 @@ void TileMap::loadFromFile(const std::string file_name)
 	in_file.close();
 }
 
+const int TileMap::getA() const
+{
+	return this->a;
+}
+
+void TileMap::setA(int a)
+{
+	this->a = a;
+}
+
+const int TileMap::getB() const
+{
+	return this->b;
+}
+
+void TileMap::setB(int b)
+{
+	this->b = b;
+}
+
 void TileMap::updateCollision(Entity* entity, const float& dt)
 {
 	//World bounds
@@ -293,13 +314,14 @@ void TileMap::updateDamaging(Entity* entity)
 
 				if (playerBounds.intersects(wallBounds))
 				{
-					entity->hp -= 10;;
+					entity->setHp(entity->getHp()-10);
 				}
 			}
 
 		}
 	}
 }
+
 int TileMap::updatePicking(Entity* entity)
 {
 	for (int x = this->fromX; x < this->toX; x++)

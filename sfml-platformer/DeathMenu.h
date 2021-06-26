@@ -20,6 +20,7 @@ public:
 	virtual ~DeathMenu();
 
 	void setDays(int days);
+
 	void update();
 	void render(sf::RenderTarget& target);
 };

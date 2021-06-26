@@ -9,21 +9,18 @@ private:
 
     void initVariables();
     void initComponents();
-
-    
 public:
     Player(float x, float y, sf::Texture& texture_sheet);
     virtual ~Player();
 
     //Variables
-    //int hunger;
 
     //Function
     void updateAttack();
     void updatePick();
     void updateAnimation(const float& dt);
-    void update(const float& dt);
 
+    void update(const float& dt);
     void render(sf::RenderTarget& target);
 };
 

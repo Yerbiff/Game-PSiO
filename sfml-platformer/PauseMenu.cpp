@@ -43,6 +43,7 @@ PauseMenu::PauseMenu(sf::RenderWindow& window, sf::Font& font)
 PauseMenu::~PauseMenu()
 {
 }
+
 void PauseMenu::MoveUp()
 {
 	if (selectedItemIndex_ - 1 >= 0)
@@ -52,6 +53,7 @@ void PauseMenu::MoveUp()
 		menu[selectedItemIndex_].setFillColor(sf::Color::White);
 	}
 }
+
 void PauseMenu::MoveDown()
 {
 	if (selectedItemIndex_ + 1 < MAX_NUMBER_OF_ITEMS)
@@ -61,15 +63,18 @@ void PauseMenu::MoveDown()
 		menu[selectedItemIndex_].setFillColor(sf::Color::White);
 	}
 }
+
 const bool PauseMenu::isItemPressed(const int num)
 {
 	return num == this->GetPressedItem();
 }
-int PauseMenu::GetPressedItem()
+
+const int PauseMenu::GetPressedItem() const
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
 		return selectedItemIndex_;
 }
+
 void PauseMenu::update()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))

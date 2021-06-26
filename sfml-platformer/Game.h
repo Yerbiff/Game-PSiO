@@ -20,12 +20,6 @@ private:
 	void initWindow();
 	void initKeys();
 	void initStates();
-	
-
-public:
-	//Constructors/Destructors
-	Game();
-	virtual ~Game();
 
 	//Functions
 	void endAplication();
@@ -37,9 +31,11 @@ public:
 
 	//Render
 	void render();
+public:
+	//Constructors/Destructors
+	Game();
+	virtual ~Game();
 
 	void run();
-
-
 };
 

@@ -15,21 +15,23 @@ protected:
 	sf::RectangleShape shape;
 	bool collision;
 	short type;
+
 public:
 	Tile();
 	Tile(int grid_x, int grid_y, float gridSizeF, const sf::Texture& texture, const sf::IntRect& texture_rect, bool collison = false, short type = TileTypes::DEFAULT);
 	virtual ~Tile();
 
+	//Getters
 	const short& getType()const;
-
 	const bool& getCollision()const;
 	const sf::Vector2f& getPosition()const;
 	const sf::FloatRect getGlobalBounds()const;
 	const sf::IntRect getTextureRect() const;
-	sf::RectangleShape getShape();
+	const sf::RectangleShape getShape() const;
 
+	//Functions
 	void deleteTile();
-	const bool intersects(const sf::FloatRect bounds)const;
+	const bool intersects(const sf::FloatRect bounds) const;
 
 	void update();
 	void render(sf::RenderTarget& target);

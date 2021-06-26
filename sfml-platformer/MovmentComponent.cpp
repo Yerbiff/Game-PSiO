@@ -52,10 +52,12 @@ void MovmentComponent::stopVelocity()
 	this->velocity.x = 0.f;
 	this->velocity.y = 0.f;
 }
+
 void MovmentComponent::stopVelocityX()
 {
 	this->velocity.x = 0.f;
 }
+
 void MovmentComponent::stopVelocityY()
 {
 	this->velocity.y = 0.f;

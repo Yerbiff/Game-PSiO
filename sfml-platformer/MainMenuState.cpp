@@ -57,17 +57,7 @@ void MainMenuState::initMenuitems()
 	this->menu[1].setPosition(sf::Vector2f(this->window->getSize().x / 10.f, this->window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1.f) * 2));
 
 	selectedItemIndex_ = 0;
-	/*if (this->days > 0)
-	{
-		this->result.setFont(font);
-		this->result.setFillColor(sf::Color::Black);
-		this->result.setString("You have lived "+std::to_string(this->days)+" days");
-		this->result.setCharacterSize(60);
-		this->result.setPosition(sf::Vector2f((this->window->getSize().x / 2.f)-200.f, this->window->getSize().y / 2));*/
-
-	//}
 }
-
 
 MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states) : State(window, supportedKeys, states)
 {
@@ -92,6 +82,7 @@ void MainMenuState::MoveUp()
 		menu[selectedItemIndex_].setFillColor(sf::Color::White);
 	}
 }
+
 void MainMenuState::MoveDown()
 {
 	if (selectedItemIndex_ + 1 < MAX_NUMBER_OF_ITEMS)
@@ -122,9 +113,7 @@ void MainMenuState::updateInput(const float& dt)
 			this->states->push(new GameState(this->window, this->supportedKeys, this->states));
 			break;
 		case 1:
-			//this->quit = true;
-			this->endState();
-			//exit(1);//wy³aczenie aplikacji z menu
+			exit(1);
 			break;
 		}
 

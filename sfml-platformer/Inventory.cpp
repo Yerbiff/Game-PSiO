@@ -17,6 +17,7 @@ void Inventory::initTextures()
 	}
 
 }
+
 void Inventory::initSprites()
 {
 	for (int i = 1; i < MAX_NUMBER_OF_TEXTURES; i++)
@@ -112,6 +113,7 @@ void Inventory::addItem(int id)
 		}
 	}
 }
+
 void Inventory::moveLeft()
 {
 	if (selectedItemIndex_ - 1 >= 0)
@@ -131,11 +133,13 @@ void Inventory::moveRight()
 		this->eq_square[selectedItemIndex_].setFillColor(sf::Color(255, 255, 255, 50));
 	}
 }
-int Inventory::GetPressedItem()
+
+const int Inventory::GetPressedItem() const
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
 		return selectedItemIndex_;
 }
+
 void Inventory::updatePicking(sf::RenderWindow& window)
 {
 	//if item is in eq put picture in eq
@@ -191,8 +195,8 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				this->amount_value[0] -= 1;
 				if (this->amount_value[0] <= 0)
 					this->amount_value[0] = 0;
-				entity.hp += 10;
-				entity.hunger += 10;
+				entity.setHp(entity.getHp()+10);
+				entity.setHunger(entity.getHunger() + 10);
 			
 				this->amount[0].setString(std::to_string(amount_value[0]));
 			}
@@ -203,8 +207,8 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				this->amount_value[1] -= 1;
 				if (this->amount_value[1] <= 0)
 					this->amount_value[1] = 0;
-				entity.hp += 10;
-				entity.hunger += 10;
+				entity.setHp(entity.getHp() + 10);
+				entity.setHunger(entity.getHunger() + 10);
 
 				this->amount[1].setString(std::to_string(amount_value[1]));
 			}
@@ -216,8 +220,8 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				if (this->amount_value[2] <= 0)
 					this->amount_value[2] = 0;
 			
-				entity.hp += 10;
-				entity.hunger += 10;
+				entity.setHp(entity.getHp() + 10);
+				entity.setHunger(entity.getHunger() + 10);
 				this->amount[2].setString(std::to_string(amount_value[2]));
 			}
 			
@@ -229,8 +233,8 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 				if (this->amount_value[3] <= 0)
 					this->amount_value[3] = 0;
 			
-				entity.hp += 10;
-				entity.hunger += 10;
+				entity.setHp(entity.getHp() + 10);
+				entity.setHunger(entity.getHunger() + 10);
 				this->amount[3].setString(std::to_string(amount_value[3]));
 			}
 			
@@ -238,10 +242,10 @@ void Inventory::updateUsing(const float dt, Entity& entity)
 
 		}
 		//has to be changed
-		if (entity.hp >= 100)
-			entity.hp = 100;
-		if (entity.hunger >= 100)
-			entity.hunger = 100;
+		if (entity.getHp() >= 100)
+			entity.setHp(100);
+		if (entity.getHunger() >= 100)
+			entity.setHunger(100);
 	}
 	for (int i = 0; i < MAX_NUMBER_OF_ITEM - 1; i++)
 	{

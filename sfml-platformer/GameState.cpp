@@ -36,6 +36,7 @@ void GameState::initFonts()
 		throw("ERROR::Could not load font");
 	}
 }
+
 void GameState::initTextures()
 {
 	if(!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprites/Player/sprite_sheet.png"))
@@ -66,6 +67,7 @@ void GameState::initTileMap()
 	this->tileMap = new TileMap(32,100,100,"Resources/Images/Tiles/tilesheet1.png");
 	this->tileMap->loadFromFile("text.slmp");
 }
+
 void GameState::initEq()
 {
 	this->eq = new Inventory(*this->window,this->font);
@@ -73,6 +75,7 @@ void GameState::initEq()
 
 	//
 }
+
 void GameState::initStatus()
 {
 	this->clock.setPosition(1660, 25);
@@ -98,12 +101,12 @@ void GameState::initStatus()
 
 	this->hp.setFont(font);
 	this->hp.setFillColor(sf::Color(255, 255, 255, 200));
-	this->hp.setString(std::to_string(this->player->hp));
+	this->hp.setString(std::to_string(this->player->getHp()));
 	this->hp.setPosition(1470, 55);
 
 	this->hunger_lv.setFont(font);
 	this->hunger_lv.setFillColor(sf::Color(255, 255, 255, 200));
-	this->hunger_lv.setString(std::to_string(this->player->hunger));
+	this->hunger_lv.setString(std::to_string(this->player->getHunger()));
 	this->hunger_lv.setPosition(1580, 55);
 
 }
@@ -129,9 +132,6 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	this->initStatus();
 
 }
-
-
-
 
 GameState::~GameState()
 {
@@ -176,7 +176,7 @@ void GameState::updatePlayerInput(const float& dt)
 		this->player->move(0.f, -1.f, dt);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
 		this->player->move(0.f, 1.f, dt);
-	if (this->player->hp == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
+	if (this->player->getHp() == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Key::X))
 	{
 		this->endState();
 	}
@@ -216,12 +216,13 @@ void GameState::updateTileMap(const float& dt)
 	}
 	
 }
+
 void GameState::updateStatus(const float& dt)
 {
 	//Switching color of circles (hp and day) depends of value
-	if (this->player->hp <= 0)
-		this->player->hp = 0;
-	switch (this->player->hp)
+	if (this->player->getHp() <= 0)
+		this->player->setHp(0);
+	switch (this->player->getHp())
 	{
 	case 0:
 		this->health.setFillColor(sf::Color::Black);
@@ -294,16 +295,16 @@ void GameState::updateStatus(const float& dt)
 	this->day.setString("Day " + std::to_string(this->days));
 
 	//updating hunger
-	this->hp.setString(std::to_string(this->player->hp));
-	if (this->player->hunger <= 0)
-		this->player->hunger = 0;
-	if (this->player->hunger == 0)
+	this->hp.setString(std::to_string(this->player->getHp()));
+	if (this->player->getHunger() <= 0)
+		this->player->setHunger(0);
+	if (this->player->getHunger() == 0)
 	{
 		if (temp_t2 == 0)
 			temp_t2 = this->time2;
 		if (abs(temp_t2 - this->time2) >= 5)
 		{
-			this->player->hp -= 5;;
+			this->player->setHp(this->player->getHp() - 5);
 			temp_t2 = 0;
 		}
 	}
@@ -311,12 +312,13 @@ void GameState::updateStatus(const float& dt)
 	{
 		if (this->time2 / 4 >= 2)
 		{
-			this->player->hunger -= 10;
+			this->player->setHunger(this->player->getHunger() - 10);
 			this->time2 = 0;
 		}
 	}
-	this->hunger_lv.setString(std::to_string(this->player->hunger));
+	this->hunger_lv.setString(std::to_string(this->player->getHunger()));
 }
+
 void GameState::updateDay_Night()
 {
 	//updating day and night
@@ -329,15 +331,15 @@ void GameState::updateDay_Night()
 	if (this->time / 4 <= 9)
 	{
 		temp_t3 -= time / 60;
-		tileMap->a = 3 - temp_t3;
-		tileMap->b = 6 - temp_t3;
-		if (tileMap->a >= 17)
+		tileMap->setA(3 - temp_t3);
+		tileMap->setB(6 - temp_t3);
+		if (tileMap->getA() >= 17)
 		{
-			tileMap->a = 17;
+			tileMap->setA(17);
 		}
-		if (tileMap->b >= 20)
+		if (tileMap->getB() >= 20)
 		{
-			tileMap->b = 20;
+			tileMap->setB(20);
 		}
 	}
 	if (this->time / 4 >= 9.0001 && this->time / 4 <= 9.1)
@@ -349,15 +351,15 @@ void GameState::updateDay_Night()
 		temp_t3 -= time / 600;
 
 
-		tileMap->a = 17 + temp_t3;
-		tileMap->b = 20 + temp_t3;
-		if (tileMap->a <= 3)
+		tileMap->setA(17 + temp_t3);
+		tileMap->setB(20 + temp_t3);
+		if (tileMap->getA() <= 3)
 		{
-			tileMap->a = 3;
+			tileMap->setA(3);
 		}
-		if (tileMap->b <= 6)
+		if (tileMap->getB() <= 6)
 		{
-			tileMap->b = 6;
+			tileMap->setB(6);
 		}
 		this->clock.setFillColor(sf::Color(8, 37, 103));;
 	}
@@ -404,10 +406,9 @@ void GameState::update(const float& dt)
 
 }
 
-
 void GameState::render(sf::RenderTarget* target)
 {
-	if (this->player->hp != 0)
+	if (this->player->getHp() != 0)
 	{
 		if (!target)
 			target = this->window;

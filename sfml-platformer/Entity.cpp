@@ -5,6 +5,7 @@ void Entity::initVariables()
 {
 	this->movmentComponent = NULL;
 	this->hp = 100;
+	this->hunger = 100;
 }
 
 Entity::Entity()
@@ -17,6 +18,26 @@ Entity::~Entity()
 	delete this->movmentComponent;
 	delete this->animationComponent;
 	delete this->hitboxComponent;
+}
+
+const int Entity::getHp() const
+{
+	return this->hp;
+}
+
+const int Entity::getHunger() const
+{
+	return this->hunger;
+}
+
+void Entity::setHp(int hp)
+{
+	this->hp = hp;
+}
+
+void Entity::setHunger(int hunger)
+{
+	this->hunger = hunger;
 }
 
 void Entity::setTexture(sf::Texture& texture)
@@ -38,7 +59,6 @@ void Entity::createAnimationComponent(sf::Texture& texture_sheet)
 {
 	this->animationComponent = new AnimationComponent(this->sprite, texture_sheet);
 }
-
 
 const sf::Vector2f& Entity::getPosition() const
 {

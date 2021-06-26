@@ -8,7 +8,7 @@ class AnimationComponent
 private:
 	class Animation
 	{
-	public:
+	private:
 		//Variables
 		sf::Sprite& sprite;
 		sf::Texture& textureSheet;
@@ -20,7 +20,7 @@ private:
 		sf::IntRect startRect;
 		sf::IntRect crrRect;
 		sf::IntRect endRect;
-
+	public:
 		Animation(sf::Sprite& sprite, sf::Texture& texture_sheet ,float animation_timer, int start_frame_x, int start_frame_y, int frames_x, int frames_y, int width, int height)
 			:sprite(sprite),textureSheet(texture_sheet),timer(0.f), done(false), animationTimer(animation_timer), width(width), height(height)
 		{
@@ -76,15 +76,14 @@ private:
 	std::map<std::string, Animation*> animations;
 	Animation* lastAnimation;
 	Animation* priorityAnimation;
+
+	const bool& isDone(const std::string key);
 public:
 	AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
 	virtual ~AnimationComponent();
 
-	const bool& isDone(const std::string key);
-
 	//Functions
 	void addAnimation(const std::string key, float animation_timer, int start_frame_x, int start_frame_y, int frames_x, int frames_y, int width, int height);
-
 
 	const bool& play(const std::string key, const float& dt, const bool priority = false);
 };

@@ -30,20 +30,18 @@ private:
 	sf::Text hp;
 	sf::Text hunger_lv;
 	sf::Text day;
+	sf::Font font;
 
 	int temp_t;
 	int temp_t2;
 	float temp_t3;
 	int days;
 
-	sf::Font font;
 	PauseMenu* pmenu;
 	Player* player;
 	Inventory* eq;
 	DeathMenu* dmenu;
-
 	TileMap* tileMap;
-	//sf::Texture texture;
 
 	//Functions
 	void intiView();
@@ -60,6 +58,7 @@ public:
 	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~GameState();
 
+	//Functions
 	void updateView(const float& dt);
 	void updateInput(const float& dt);
 	void updatePlayerInput(const float& dt);

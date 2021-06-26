@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Game.h"
-//#include "Menu.h"
 
 
 //Initialization
@@ -58,8 +57,6 @@ void Game::initStates()
 	this->states.push(new MainMenuState(this->window, &this->supportedKeys, &this->states));
 	
 }
-
-
 
 //Constructors/Destructors
 
