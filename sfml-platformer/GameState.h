@@ -6,9 +6,11 @@
 #include "TileMap.h"
 #include "Inventory.h"
 #include "DeathMenu.h"
+#include "Enemy.h"
 
 class PauseMenu;
 class Player;
+class Enemy;
 class TileMap;
 class Inventory;
 class sf::View;
@@ -39,6 +41,7 @@ private:
 
 	PauseMenu* pmenu;
 	Player* player;
+	Enemy* enemy;
 	Inventory* eq;
 	DeathMenu* dmenu;
 	TileMap* tileMap;
@@ -52,6 +55,7 @@ private:
 	void initTextures();
 	void initPauseMenu();
 	void initPlayers();
+	void initEnemies();
 	void initTileMap();
 	void initDeathMenu();
 public:

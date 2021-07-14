@@ -43,6 +43,10 @@ void GameState::initTextures()
 	{
 		throw("could not load player texture");
 	}
+	if (!this->textures["ENEMY_SHEET"].loadFromFile("Resources/Images/Sprites/Enemies/sprite_sheet.png"))
+	{
+		throw("could not load player texture");
+	}
 	
 }
 
@@ -61,6 +65,13 @@ void GameState::initPlayers()
 	this->player = new Player(rand()% 999, rand() % 999, this->textures["PLAYER_SHEET"]);
 	this->player->scale(sf::Vector2f(1.8, 1.8));
 }
+
+void GameState::initEnemies()
+{
+	this->enemy = new Enemy(rand() % 999, rand() % 999, this->textures["ENEMY_SHEET"]);
+	this->enemy->scale(sf::Vector2f(1, 1));
+}
+
 
 void GameState::initTileMap()
 {
@@ -127,6 +138,7 @@ GameState::GameState(sf::RenderWindow* window, std::map<std::string, int>* suppo
 	this->days = 1;
 
 	this->initPlayers();
+	this->initEnemies();
 	this->initTileMap();
 	this->initEq();
 	this->initStatus();
@@ -381,6 +393,7 @@ void GameState::update(const float& dt)
 		this->updateTileMap(dt);
 
 		this->player->update(dt);
+		this->enemy->update(dt);
 
 		if (this->getKeytime1())
 		{
@@ -417,7 +430,10 @@ void GameState::render(sf::RenderTarget* target)
 
 		this->tileMap->render(*target, this->player);
 
+		this->enemy->render(*target);
+
 		this->player->render(*target);
+		
 
 		this->tileMap->renderDeferred(*target);
 

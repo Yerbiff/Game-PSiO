@@ -81,6 +81,9 @@
     <ClInclude Include="DeathMenu.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="DeathMenu.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Header Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
