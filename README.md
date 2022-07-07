@@ -51,7 +51,7 @@ A platform game created for the purpose of completing a course in structured and
 
 ### Built With
 
-* ![image](https://user-images.githubusercontent.com/48961236/177792166-932eaa8c-75f0-4179-bbc7-7487044c0a6d.png)
+* ![image](https://user-images.githubusercontent.com/48961236/177792255-66f034bb-0e37-4199-b0a7-716dfa472cdd.png)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
