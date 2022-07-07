@@ -1,5 +1,3 @@
-Platformowa Gra stworzona na potrzebe zaliczenia przedmiotu z programowania strukturalnego i obiektowego.
-
 
 <br />
 <div align="center">
@@ -53,8 +51,7 @@ A platform game created for the purpose of completing a course in structured and
 
 ### Built With
 
-* ![ISO_C++_Logo svg](https://user-images.githubusercontent.com/48961236/177790264-33b8f6b4-d51d-418d-a902-0f21156297a4.png)
-
+* ![image](https://user-images.githubusercontent.com/48961236/177792166-932eaa8c-75f0-4179-bbc7-7487044c0a6d.png)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
